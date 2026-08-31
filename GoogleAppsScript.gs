@@ -1,6 +1,6 @@
 const SPREADSHEET_ID = '10EKgMKuGEM11NUs35QZBJJSAFlNk18cUvvxixHtC5c4';
 
-const ABAS_CRP = ['CRP I', 'CRP II', 'CRP III', 'CRP IV', 'CPE'];
+const ABAS_CRP = ['CRP I', 'CRP II', 'CRP III', 'CRP IV'];
 
 const MAPA_COLUNAS = {
   'data de inicio': 'DATA DE INÍCIO',

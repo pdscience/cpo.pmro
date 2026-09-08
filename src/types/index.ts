@@ -17,7 +17,7 @@ export interface Operacao {
   comandoRegional?: string;
   crp?: string;
   tipoRecurso?: string;
-  origem?: "operacao" | "calendario";
+  origem?: "operacao";
   status: "rascunho" | "pendente" | "aprovado" | "rejeitado";
   createdAt: string;
   updatedAt: string;

@@ -68,7 +68,8 @@ const operacoesFiltradas = computed(() => {
         op.orgaoDemandante.toLowerCase().includes(filtroOrgao.value.toLowerCase()));
     const matchesCRP =
       !filtroCRP.value ||
-      (op.comandoRegional && op.comandoRegional.toLowerCase().trim() === filtroCRP.value.toLowerCase().trim()) ||
+      (op.comandoRegional &&
+        op.comandoRegional.toLowerCase().trim() === filtroCRP.value.toLowerCase().trim()) ||
       (op.crp && op.crp.toLowerCase().trim() === filtroCRP.value.toLowerCase().trim());
     const matchesArea =
       !filtroArea.value ||
@@ -110,11 +111,17 @@ const orgaosUnicos = computed(() => {
 });
 
 const organizacoesUnicas = computed(() => {
-  return [...new Set(store.operacoesReais.map((op) => op.organizacaoPolicialMilitar).filter((o) => o))];
+  return [
+    ...new Set(store.operacoesReais.map((op) => op.organizacaoPolicialMilitar).filter((o) => o)),
+  ];
 });
 
 const crpsUnicos = computed(() => {
-  return [...new Set(store.operacoesReais.map((op) => (op.comandoRegional || op.crp)?.trim()).filter((c) => c))];
+  return [
+    ...new Set(
+      store.operacoesReais.map((op) => (op.comandoRegional || op.crp)?.trim()).filter((c) => c),
+    ),
+  ];
 });
 
 const areasUnicas = computed(() => {
@@ -215,7 +222,10 @@ const resumoPorMunicipio = computed(() => {
   const municipiosSemCoordenadas = new Set<string>();
 
   const processarOp = (op: (typeof store.operacoes)[0]) => {
-    const municipios = (op.municipio ?? '').split(',').map(m => m.trim()).filter(Boolean);
+    const municipios = (op.municipio ?? "")
+      .split(",")
+      .map((m) => m.trim())
+      .filter(Boolean);
     if (municipios.length === 0) return;
     for (const nome of municipios) {
       const key = encontrarChaveMunicipio(nome);
@@ -361,9 +371,6 @@ watch(
         <h1 class="text-2xl font-bold text-gray-800">Operações</h1>
         <p class="text-gray-500">Lista de todas as operações cadastradas</p>
       </div>
-      <router-link to="/calendario" class="text-[#1e3a5f] text-sm font-medium hover:underline">
-        + Nova Operação (ir para Calendário)
-      </router-link>
     </div>
 
     <div class="card card-hover p-4">
@@ -493,10 +500,7 @@ watch(
             </tr>
           </thead>
           <tbody>
-            <tr
-              v-for="op in operacoesPaginadas"
-              :key="op.id"
-            >
+            <tr v-for="op in operacoesPaginadas" :key="op.id">
               <td>{{ formatDate(op.diaInicio) }}</td>
               <td>{{ op.totalDias }}</td>
               <td>
@@ -559,10 +563,7 @@ watch(
       <div v-if="operacoesFiltradas.length === 0" class="py-12 text-center text-gray-500">
         Nenhuma operação encontrada com os filtros selecionados.
       </div>
-      <div
-        v-else
-        class="flex items-center justify-between px-4 py-3 border-t border-gray-100"
-      >
+      <div v-else class="flex items-center justify-between px-4 py-3 border-t border-gray-100">
         <div class="text-sm text-gray-500">
           Mostrando {{ (paginaAtual - 1) * itensPorPagina + 1 }} -
           {{ Math.min(paginaAtual * itensPorPagina, operacoesFiltradas.length) }} de

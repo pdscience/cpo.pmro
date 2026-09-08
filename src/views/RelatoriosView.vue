@@ -8,7 +8,7 @@ const ANO_RELATORIO = '2026';
 const anoCorrente = new Date().getFullYear().toString();
 const periodoInicio = ref(`${anoCorrente}-01-01`);
 
-const periodoFim = ref("");
+const periodoFim = ref(`${anoCorrente}-12-31`);
 const organizacaoSelecionada = ref("");
 const filtroCRP = ref("");
 const filtroPoliciamento = ref("");

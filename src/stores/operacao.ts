@@ -22,7 +22,7 @@ export const useOperacaoStore = defineStore("operacao", () => {
   const erro = ref<string | null>(null);
   const modoOffline = ref(false);
 
-  const operacoesReais = computed(() => operacoes.value.filter((op) => op.origem !== "calendario"));
+  const operacoesReais = computed(() => operacoes.value);
 
   // Carregar dados do LocalStorage ao iniciar
   function carregarDados() {
@@ -478,7 +478,9 @@ export const useOperacaoStore = defineStore("operacao", () => {
       return str;
     };
 
-    const diaInicio = formatarData(extrairData(getVal(["diaInicio", "DATA DE INÍCIO", "dia de início"])));
+    const diaInicio = formatarData(
+      extrairData(getVal(["diaInicio", "DATA DE INÍCIO", "dia de início"])),
+    );
     const nomeOperacao = String(
       getVal(["nomeOperacaoApoio", "NOME DA OPERAÇÃO/APOIO", "operação", "nome"]),
     );
@@ -486,6 +488,11 @@ export const useOperacaoStore = defineStore("operacao", () => {
     if (!diaInicio && !nomeOperacao) {
       return null;
     }
+
+    const recursoFinanceiroEmpregado = limparValor(
+      getVal(["recursoFinanceiroEmpregado", "RECURSO EMPREGADO", "RECURSO FINANCEIRO EMPREGADO"]),
+    );
+    const valorGasto = limparValor(getVal(["valorGasto", "VALOR GASTO", "VALOR_GASTO"]));
 
     return {
       id: String(getVal(["id", "ID"]) || gerarId()),
@@ -504,10 +511,8 @@ export const useOperacaoStore = defineStore("operacao", () => {
       numeroSei: String(getVal(["numeroSei", "Nº SEI", "SEI"])),
       qtdeEfetivo: Number(getVal(["qtdeEfetivo", "QTDE EFETIVO"], 0)),
       qtdeViaturas: Number(getVal(["qtdeViaturas", "QTDE VIATURAS"], 0)),
-      recursoFinanceiroEmpregado: limparValor(
-        getVal(["recursoFinanceiroEmpregado", "RECURSO EMPREGADO", "RECURSO FINANCEIRO EMPREGADO"]),
-      ),
-      valorGasto: limparValor(getVal(["valorGasto", "VALOR GASTO", "VALOR_GASTO"])),
+      recursoFinanceiroEmpregado: recursoFinanceiroEmpregado || valorGasto,
+      valorGasto,
       codOperacaoSiseg: String(getVal(["codOperacaoSiseg", "CÓD. OPERAÇÃO SISEG"])),
       comandoRegional: String(getVal(["comandoRegional", "COMANDO REGIONAL"])),
       crp: String(getVal(["crp", "CRP"])),

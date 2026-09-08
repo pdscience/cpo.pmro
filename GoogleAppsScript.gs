@@ -1,6 +1,6 @@
 const SPREADSHEET_ID = '10EKgMKuGEM11NUs35QZBJJSAFlNk18cUvvxixHtC5c4';
 
-const ABAS_CRP = ['CRP I', 'CRP II', 'CRP III', 'CRP IV'];
+const ABAS_CRP = ['CRP I', 'CRP II', 'CRP III', 'CRP IV', 'CPE'];
 
 const MAPA_COLUNAS = {
   'data de inicio': 'DATA DE INÍCIO',
@@ -14,7 +14,10 @@ const MAPA_COLUNAS = {
   'n sei': 'Nº SEI',
   'qtde total de efetivo': 'QTDE EFETIVO',
   'qtde total de viaturas': 'QTDE VIATURAS',
-  'recursos financeiros empregados': 'TIPO FINANCEIRO EMPREGADO',
+  'recursos financeiros empregados': 'RECURSO FINANCEIRO EMPREGADO',
+  'recurso financeiro empregado': 'RECURSO FINANCEIRO EMPREGADO',
+  'recurso empregado': 'RECURSO FINANCEIRO EMPREGADO',
+  'tipo financeiro empregado': 'TIPO FINANCEIRO EMPREGADO',
   'valor total gasto': 'VALOR GASTO',
   'cod operacao siseg': 'CÓD. OPERAÇÃO SISEG',
 };
@@ -47,9 +50,6 @@ function handleRequest(e) {
       case 'list':
         result = listarOperacoes();
         break;
-      case 'listCalendario':
-        result = listarCalendario();
-        break;
       case 'get':
         result = buscarOperacao(params.id);
         break;
@@ -64,6 +64,9 @@ function handleRequest(e) {
         break;
       case 'sync':
         result = sincronizarOperacoes(params.data ? JSON.parse(params.data) : []);
+        break;
+      case 'diagnosticar':
+        result = diagnosticarAbaCPE();
         break;
       default:
         result = { status: 'error', message: 'Ação não reconhecida' };
@@ -117,7 +120,8 @@ function mapearLinha(linha, cabecalhos, nomeAba) {
 
     if (targetField === 'VALOR GASTO') {
       op[targetField] = parseMonetario(valor);
-      op['RECURSO EMPREGADO'] = op[targetField];
+    } else if (targetField === 'RECURSO FINANCEIRO EMPREGADO') {
+      op[targetField] = parseMonetario(valor);
     } else if (targetField === 'QTDE EFETIVO' || targetField === 'QTDE VIATURAS') {
       op[targetField] = typeof valor === 'number' ? Math.round(valor) : (parseInt(String(valor).replace(/\D/g, ''), 10) || 0);
     } else if (targetField === 'TOTAL DE DIAS') {
@@ -132,8 +136,8 @@ function mapearLinha(linha, cabecalhos, nomeAba) {
   op.CRP = nomeAba;
   op.STATUS = 'rascunho';
   if (!op['TIPO FINANCEIRO EMPREGADO']) op['TIPO FINANCEIRO EMPREGADO'] = '';
-  if (!op['RECURSO EMPREGADO']) op['RECURSO EMPREGADO'] = 0;
-  if (!op['VALOR GASTO']) op['VALOR GASTO'] = 0;
+  if (!op['RECURSO FINANCEIRO EMPREGADO']) op['RECURSO FINANCEIRO EMPREGADO'] = op['VALOR GASTO'] || 0;
+  if (op['VALOR GASTO'] === undefined || op['VALOR GASTO'] === null || op['VALOR GASTO'] === '') op['VALOR GASTO'] = 0;
   op['CRIADO EM'] = new Date().toISOString();
   op['ATUALIZADO EM'] = new Date().toISOString();
   op['CRIADO POR'] = 'importado';
@@ -159,7 +163,6 @@ function listarOperacoes() {
       const linha = dados[i];
       const temDados = linha.some(function(cel) { return cel !== '' && cel !== null && cel !== undefined; });
       if (!temDados) continue;
-      if (!linha[0] && !linha[5]) continue;
       const op = mapearLinha(linha, cabecalhos, nomeAba);
       todas.push(op);
     }
@@ -168,11 +171,27 @@ function listarOperacoes() {
   return { status: 'success', data: todas };
 }
 
-function listarCalendario() {
-  return { status: 'success', data: [] };
-}
-
 function buscarOperacao(id) {
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+
+  for (let s = 0; s < ABAS_CRP.length; s++) {
+    const nomeAba = ABAS_CRP[s];
+    const sheet = spreadsheet.getSheetByName(nomeAba);
+    if (!sheet) continue;
+
+    const dados = sheet.getDataRange().getValues();
+    if (dados.length <= 1) continue;
+
+    const cabecalhos = dados[0];
+    for (let i = 1; i < dados.length; i++) {
+      const linha = dados[i];
+      const op = mapearLinha(linha, cabecalhos, nomeAba);
+      if (op.ID === id) {
+        return { status: 'success', data: op };
+      }
+    }
+  }
+
   return { status: 'error', message: 'Operação não encontrada' };
 }
 
@@ -190,4 +209,17 @@ function excluirOperacao(id) {
 
 function sincronizarOperacoes(operacoes) {
   return { status: 'error', message: 'Operação somente leitura' };
+}
+
+function diagnosticarAbaCPE() {
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = spreadsheet.getSheetByName('CPE');
+  if (!sheet) return { status: 'error', message: 'Aba CPE não encontrada' };
+  const dados = sheet.getDataRange().getValues();
+  return {
+    status: 'success',
+    totalLinhas: dados.length,
+    cabecalhos: dados[0],
+    primeiraLinha: dados.length > 1 ? dados[1] : null
+  };
 }

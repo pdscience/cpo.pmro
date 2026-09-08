@@ -21,11 +21,8 @@ const activeTab = ref<"api" | "importar" | "auditoria">("api");
 // API config
 const apiUrl = ref("");
 const sincronizando = ref(false);
-const sincronizandoCalendario = ref(false);
 const apiMessage = ref("");
 const apiError = ref("");
-const calendarioMessage = ref("");
-const calendarioError = ref("");
 
 // Import
 const jsonData = ref("");
@@ -129,59 +126,6 @@ const sincronizarDados = async () => {
     apiError.value = "Erro ao sincronizar. Verifique a URL e tente novamente.";
   } finally {
     sincronizando.value = false;
-  }
-};
-
-// Calendário functions
-const criarCalendarioSheet = async () => {
-  const url = apiService.getApiUrl();
-  if (!url) {
-    calendarioError.value = "Configure a URL primeiro";
-    return;
-  }
-  sincronizandoCalendario.value = true;
-  calendarioMessage.value = "";
-  calendarioError.value = "";
-
-  try {
-    const response = await fetch(`${url}?action=criarCalendario`);
-    const data = await response.json();
-    if (data.status === "success") {
-      calendarioMessage.value = data.message || "Sheet Calendário criado com sucesso!";
-    } else {
-      calendarioError.value = data.message || "Erro ao criar sheet Calendário";
-    }
-  } catch (e) {
-    console.error("ErroCalendario:", e);
-    calendarioError.value = "Erro ao conectar. Verifique a URL da API.";
-  } finally {
-    sincronizandoCalendario.value = false;
-  }
-};
-
-const atualizarCalendario = async () => {
-  const url = apiService.getApiUrl();
-  if (!url) {
-    calendarioError.value = "Configure a URL primeiro";
-    return;
-  }
-  sincronizandoCalendario.value = true;
-  calendarioMessage.value = "";
-  calendarioError.value = "";
-
-  try {
-    const response = await fetch(`${url}?action=atualizarCalendario`);
-    const data = await response.json();
-    if (data.status === "success") {
-      calendarioMessage.value = data.message || "Calendário atualizado com sucesso!";
-    } else {
-      calendarioError.value = data.message || "Erro ao atualizar calendário";
-    }
-  } catch (e) {
-    console.error("ErroCalendario:", e);
-    calendarioError.value = "Erro ao conectar. Verifique a URL da API.";
-  } finally {
-    sincronizandoCalendario.value = false;
   }
 };
 
@@ -439,39 +383,6 @@ const inputClass =
             </div>
           </div>
         </div>
-
-        <!-- Calendário Sheet Configuration -->
-        <div class="card card-accent-green p-6">
-          <h2 class="text-lg font-semibold text-gray-800 mb-4">Calendário Google Sheets</h2>
-          <p class="text-sm text-gray-500 mb-4">
-            Configure a aba "Calendário" na planilha para exibir as operações no calendário.
-          </p>
-
-          <div class="space-y-4">
-            <div class="flex gap-3">
-              <button
-                @click="criarCalendarioSheet"
-                :disabled="sincronizandoCalendario"
-                class="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 transition-colors disabled:opacity-50"
-              >
-                {{ sincronizandoCalendario ? "Criando..." : "Criar Aba Calendário" }}
-              </button>
-              <button
-                @click="atualizarCalendario"
-                :disabled="sincronizandoCalendario"
-                class="px-4 py-2 border border-green-600 text-green-600 rounded-lg text-sm font-medium hover:bg-green-50 transition-colors disabled:opacity-50"
-              >
-                {{ sincronizandoCalendario ? "Atualizando..." : "Atualizar Calendário" }}
-              </button>
-            </div>
-            <div v-if="calendarioMessage" class="p-3 bg-green-50 text-green-700 rounded-lg text-sm">
-              {{ calendarioMessage }}
-            </div>
-            <div v-if="calendarioError" class="p-3 bg-red-50 text-red-700 rounded-lg text-sm">
-              {{ calendarioError }}
-            </div>
-          </div>
-        </div>
       </div>
 
       <!-- Import Tab -->
@@ -529,10 +440,7 @@ const inputClass =
         </div>
 
         <!-- Preview data -->
-        <div
-          v-if="mostrandoDados && dadosImportar.length > 0"
-          class="card p-6"
-        >
+        <div v-if="mostrandoDados && dadosImportar.length > 0" class="card p-6">
           <div class="flex items-center justify-between mb-4">
             <h2 class="text-lg font-semibold text-gray-800">
               {{ dadosImportar.length }} registros encontrados
@@ -585,10 +493,7 @@ const inputClass =
       </div>
 
       <!-- Audit Tab -->
-      <div
-        v-if="activeTab === 'auditoria'"
-        class="card p-6"
-      >
+      <div v-if="activeTab === 'auditoria'" class="card p-6">
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-lg font-semibold text-gray-800">Histórico de Ações</h2>
           <span class="text-sm text-gray-500">{{ auditoriaOrdenada.length }} registros</span>
@@ -599,11 +504,7 @@ const inputClass =
         </div>
 
         <div v-else class="space-y-4 max-h-[600px] overflow-y-auto">
-          <div
-            v-for="registro in auditoriaOrdenada"
-            :key="registro.id"
-            class="card card-hover p-4"
-          >
+          <div v-for="registro in auditoriaOrdenada" :key="registro.id" class="card card-hover p-4">
             <div class="flex items-start justify-between">
               <div class="flex items-start gap-3">
                 <div

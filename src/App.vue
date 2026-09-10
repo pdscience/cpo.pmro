@@ -18,6 +18,7 @@ onMounted(async () => {
     apiService.setApiUrl(apiUrl);
   }
   if (apiUrl) {
+    store.erro = null;
     try {
       const operacoesRaw = (await apiService.listarOperacoes()) as Array<Record<string, unknown>>;
       if (Array.isArray(operacoesRaw) && operacoesRaw.length > 0) {
@@ -30,6 +31,8 @@ onMounted(async () => {
       }
     } catch (e) {
       console.error("Erro no carregamento inicial:", e);
+      store.erro =
+        e instanceof Error ? e.message : "Não foi possível carregar as operações da planilha.";
     }
   }
 });
@@ -189,6 +192,42 @@ const logout = () => {
     </aside>
 
     <main class="flex-1 p-8 overflow-auto">
+      <div
+        v-if="store.erro"
+        class="mb-6 flex items-start justify-between gap-4 rounded-lg border border-(--color-warning)/30 bg-(--color-warning)/10 p-4"
+      >
+        <div class="flex items-start gap-3">
+          <svg
+            class="w-5 h-5 text-(--color-warning) flex-shrink-0 mt-0.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            />
+          </svg>
+          <div>
+            <p class="font-semibold text-(--color-text-primary)">
+              Não foi possível carregar as operações da planilha
+            </p>
+            <p class="text-sm text-(--color-text-secondary)">{{ store.erro }}</p>
+          </div>
+        </div>
+        <button
+          @click="store.erro = null"
+          class="text-(--color-text-muted) hover:text-(--color-text-primary) flex-shrink-0"
+          aria-label="Fechar aviso"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
       <router-view />
     </main>
   </div>

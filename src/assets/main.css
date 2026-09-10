@@ -44,13 +44,13 @@
   --color-surface-elevated: #334155;
   --color-border: #475569;
   --color-border-subtle: #334155;
-  --color-text-muted: #94a3b8;
-  --color-text-secondary: #94a3b8;
-  --color-text-primary: #f1f5f9;
+  --color-text-muted: #ffffff;
+  --color-text-secondary: #ffffff;
+  --color-text-primary: #ffffff;
   --color-bg: #0f1729;
   --color-sidebar: #0f1729;
-  --color-sidebar-text: #f8fafc;
-  --color-sidebar-text-muted: #94a3b8;
+  --color-sidebar-text: #ffffff;
+  --color-sidebar-text-muted: #ffffff;
   --color-sidebar-hover: rgba(255, 255, 255, 0.08);
   --color-sidebar-active: rgba(255, 255, 255, 0.18);
 }

@@ -1,24 +1,82 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1e3a5f;
-  --color-primary-dark: #0f2442;
-  --color-secondary: #3b82f6;
+  /* ===== Light theme (default) ===== */
+  --color-pmro: #1e3a5f;
+  --color-pmro-blue: #3b82f6;
+  --color-pmro-accent: #06b6d4;
+  --color-pmro-gold: #f59e0b;
+  --color-pmro-text: #0f172a;
+  --color-pmro-danger: #ef4444;
   --color-success: #10b981;
   --color-warning: #f59e0b;
-  --color-danger: #ef4444;
   --color-info: #06b6d4;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #f8fafc;
+  --color-border: #e2e8f0;
+  --color-border-subtle: #f1f5f9;
+  --color-text-muted: #64748b;
+  --color-text-secondary: #475569;
+  --color-text-primary: #0f172a;
+  --color-bg: #f1f5f9;
+  --color-sidebar: #1e3a5f;
+  --color-sidebar-text: #f8fafc;
+  --color-sidebar-text-muted: #cbd5e1;
+  --color-sidebar-hover: rgba(255, 255, 255, 0.08);
+  --color-sidebar-active: rgba(255, 255, 255, 0.18);
+
+  --font-sans: "Inter", ui-sans, system-ui, sans-serif;
+  --font-mono: "Source Code Pro", ui-monospace, monospace;
 }
 
-/* =============================================
-   PREMIUM CARD STYLES
-   ============================================= */
+/* ===== Dark theme overrides ===== */
+[data-theme="dark"] {
+  --color-pmro: #3b82f6;
+  --color-pmro-blue: #60a5fa;
+  --color-pmro-accent: #22d3ee;
+  --color-pmro-gold: #fbbf24;
+  --color-pmro-text: #f8fafc;
+  --color-pmro-danger: #f85656;
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-info: #22d3ee;
+  --color-surface: #1e293b;
+  --color-surface-elevated: #334155;
+  --color-border: #475569;
+  --color-border-subtle: #334155;
+  --color-text-muted: #94a3b8;
+  --color-text-secondary: #94a3b8;
+  --color-text-primary: #f1f5f9;
+  --color-bg: #0f1729;
+  --color-sidebar: #0f1729;
+  --color-sidebar-text: #f8fafc;
+  --color-sidebar-text-muted: #94a3b8;
+  --color-sidebar-hover: rgba(255, 255, 255, 0.08);
+  --color-sidebar-active: rgba(255, 255, 255, 0.18);
+}
+
+/* ===== Base ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-(--color-bg) text-(--color-text-primary) antialiased;
+  font-family: var(--font-sans);
+}
+
+#app {
+  min-height: 100vh;
+  background-color: var(--color-bg);
+}
+
+/* ===== PREMIUM CARD STYLES ===== */
 .card {
-  background-color: white;
+  background-color: var(--color-surface);
   border-radius: 0.75rem;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(30, 58, 95, 0.1);
+  border: 1px solid var(--color-border-subtle);
   box-shadow:
     0 1px 2px rgba(15, 36, 66, 0.02),
     0 2px 8px -2px rgba(15, 36, 66, 0.04),
@@ -32,7 +90,7 @@
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .card-hover {
@@ -41,7 +99,7 @@
 
 .card-hover:hover {
   transform: translateY(-2px);
-  border-color: rgba(30, 58, 95, 0.18);
+  border-color: var(--color-border);
   box-shadow:
     0 4px 8px -2px rgba(15, 36, 66, 0.06),
     0 12px 28px -8px rgba(15, 36, 66, 0.1),
@@ -56,7 +114,7 @@
   right: 0;
   z-index: 10;
   height: 3px;
-  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  background: linear-gradient(90deg, var(--color-pmro) 0%, var(--color-pmro-blue) 100%);
 }
 
 .card-accent-blue::before {
@@ -67,7 +125,7 @@
   right: 0;
   z-index: 10;
   height: 3px;
-  background: linear-gradient(90deg, #3b82f6 0%, #06b6d4 100%);
+  background: linear-gradient(90deg, var(--color-pmro-blue) 0%, var(--color-pmro-accent) 100%);
 }
 
 .card-accent-green::before {
@@ -78,7 +136,7 @@
   right: 0;
   z-index: 10;
   height: 3px;
-  background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+  background: linear-gradient(90deg, var(--color-success) 0%, var(--color-success) 100%);
 }
 
 .card-accent-orange::before {
@@ -89,7 +147,7 @@
   right: 0;
   z-index: 10;
   height: 3px;
-  background: linear-gradient(90deg, #f59e0b 0%, #f97316 100%);
+  background: linear-gradient(90deg, var(--color-pmro-gold) 0%, var(--color-warning) 100%);
 }
 
 .card-accent-purple::before {
@@ -122,18 +180,16 @@
   right: 0;
   z-index: 10;
   height: 3px;
-  background: linear-gradient(90deg, #06b6d4 0%, #22d3ee 100%);
+  background: linear-gradient(90deg, var(--color-pmro-accent) 0%, #67e8f9 100%);
 }
 
-/* =============================================
-   PREMIUM TABLE STYLES
-   ============================================= */
+/* ===== PREMIUM TABLE STYLES ===== */
 .table-container {
   width: 100%;
   overflow-x: auto;
   border-radius: 0.75rem;
-  border: 1px solid rgba(15, 36, 66, 0.12);
-  background-color: white;
+  border: 1px solid var(--color-border-subtle);
+  background-color: var(--color-surface);
   box-shadow:
     0 1px 2px rgba(15, 36, 66, 0.02),
     0 2px 8px -2px rgba(15, 36, 66, 0.04);
@@ -146,7 +202,7 @@
 }
 
 .custom-table thead {
-  background-color: #f8fafc;
+  background-color: var(--color-surface-elevated);
 }
 
 .custom-table thead th {
@@ -154,10 +210,10 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #475569;
+  color: var(--color-text-secondary);
   padding: 12px 16px;
-  border-bottom: 2px solid rgba(15, 36, 66, 0.18);
-  border-right: 1px solid rgba(15, 36, 66, 0.06);
+  border-bottom: 2px solid var(--color-border);
+  border-right: 1px solid var(--color-border-subtle);
 }
 
 .custom-table thead th:last-child {
@@ -166,7 +222,7 @@
 
 .custom-table tbody tr {
   transition: background-color 0.15s ease;
-  border-bottom: 1px solid rgba(15, 36, 66, 0.1);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .custom-table tbody tr:last-child {
@@ -174,19 +230,19 @@
 }
 
 .custom-table tbody tr:nth-child(even) {
-  background-color: rgba(30, 58, 95, 0.025);
+  background-color: color-mix(in srgb, var(--color-pmro) 6%, transparent);
 }
 
 .custom-table tbody tr:hover {
-  background-color: rgba(30, 58, 95, 0.06) !important;
+  background-color: color-mix(in srgb, var(--color-pmro) 10%, transparent) !important;
 }
 
 .custom-table tbody td {
   padding: 12px 16px;
   font-size: 0.875rem;
-  color: #334155;
-  border-bottom: 1px solid rgba(15, 36, 66, 0.08);
-  border-right: 1px solid rgba(15, 36, 66, 0.04);
+  color: var(--color-text-secondary);
+  border-bottom: 1px solid var(--color-border-subtle);
+  border-right: 1px solid color-mix(in srgb, var(--color-pmro) 3%, transparent);
 }
 
 .custom-table tbody td:last-child {
@@ -210,30 +266,26 @@
   width: 100%;
   overflow-x: auto;
   border-radius: 0.75rem;
-  border: 1px solid rgba(15, 36, 66, 0.12);
-  background-color: white;
+  border: 1px solid var(--color-border-subtle);
+  background-color: var(--color-surface);
   box-shadow:
     0 1px 2px rgba(15, 36, 66, 0.02),
     0 2px 8px -2px rgba(15, 36, 66, 0.04);
 }
 
-/* =============================================
-   UTILITY: Soft glow rings
-   ============================================= */
+/* ===== UTILITY: Soft glow rings ===== */
 .ring-soft {
-  box-shadow: 0 0 0 1px rgba(30, 58, 95, 0.06);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-pmro) 12%, transparent);
 }
 
 .ring-soft-hover:hover {
-  box-shadow: 0 0 0 1px rgba(30, 58, 95, 0.12);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-pmro) 20%, transparent);
 }
 
-/* =============================================
-   SCROLLBAR STYLING
-   ============================================= */
+/* ===== SCROLLBAR STYLING ===== */
 .scrollbar-thin {
   scrollbar-width: thin;
-  scrollbar-color: rgba(15, 36, 66, 0.15) transparent;
+  scrollbar-color: color-mix(in srgb, var(--color-pmro) 20%, transparent) transparent;
 }
 
 .scrollbar-thin::-webkit-scrollbar {
@@ -246,10 +298,92 @@
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background-color: rgba(15, 36, 66, 0.15);
+  background-color: color-mix(in srgb, var(--color-pmro) 20%, transparent);
   border-radius: 3px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(15, 36, 66, 0.25);
+  background-color: color-mix(in srgb, var(--color-pmro) 30%, transparent);
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  aside {
+    display: none !important;
+  }
+  main {
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  .min-h-screen {
+    display: block !important;
+  }
+  body {
+    background: white !important;
+    font-size: 11pt;
+    color: #111;
+  }
+
+  @page {
+    size: A4 landscape;
+    margin: 15mm 12mm;
+  }
+
+  button,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .print\:block {
+    display: block !important;
+  }
+
+  .rounded-xl,
+  .rounded-lg {
+    border-radius: 4px !important;
+  }
+  .shadow-sm {
+    box-shadow: none !important;
+  }
+  .bg-white,
+  .bg-surface {
+    background: white !important;
+  }
+  .border {
+    border: 1px solid #d1d5db !important;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th,
+  td {
+    border: 1px solid #e5e7eb;
+    padding: 4px 6px;
+    font-size: 9pt;
+  }
+  thead {
+    background-color: #f3f4f6 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .text-\[\#1e3a5f\] {
+    color: #1e3a5f !important;
+  }
+  .bg-\[\#1e3a5f\] {
+    background-color: #1e3a5f !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .bg-white {
+    break-inside: avoid;
+  }
+
+  a {
+    color: #1e3a5f !important;
+    text-decoration: none !important;
+  }
 }

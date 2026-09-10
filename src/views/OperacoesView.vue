@@ -160,12 +160,12 @@ const formatDate = (dateStr: string) => {
 
 const getStatusColor = (status: string) => {
   const colors: Record<string, string> = {
-    rascunho: "bg-gray-100 text-gray-700",
-    pendente: "bg-yellow-100 text-yellow-700",
-    aprovado: "bg-green-100 text-green-700",
-    rejeitado: "bg-red-100 text-red-700",
+    rascunho: "bg-(--color-surface-elevated) text-(--color-text-secondary)",
+    pendente: "bg-(--color-warning)/10 text-(--color-warning)",
+    aprovado: "bg-(--color-success)/10 text-(--color-success)",
+    rejeitado: "bg-(--color-pmro-danger)/10 text-(--color-pmro-danger)",
   };
-  return colors[status] || "bg-gray-100 text-gray-700";
+  return colors[status] || "bg-(--color-surface-elevated) text-(--color-text-secondary)";
 };
 
 const getStatusLabel = (status: string) => {
@@ -368,87 +368,87 @@ watch(
   <div class="space-y-6">
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-gray-800">Operações</h1>
-        <p class="text-gray-500">Lista de todas as operações cadastradas</p>
+        <h1 class="text-2xl font-bold text-(--color-text-primary)">Operações</h1>
+        <p class="text-(--color-text-muted)">Lista de todas as operações cadastradas</p>
       </div>
     </div>
 
     <div class="card card-hover p-4">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div class="md:col-span-2">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Buscar</label>
+          <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">Buscar</label>
           <input
             v-model="busca"
             type="text"
             placeholder="Nome, SEI ou Código SISEG..."
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           />
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">CRP</label>
+          <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">CRP</label>
           <select
             v-model="filtroCRP"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           >
             <option value="">Todos</option>
             <option v-for="c in crpsUnicos" :key="c" :value="c">{{ c }}</option>
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Policiamento Empregado</label>
+          <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">Policiamento Empregado</label>
           <select
             v-model="filtroPoliciamento"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           >
             <option value="">Todos</option>
             <option v-for="t in tiposRecursoUnicos" :key="t" :value="t">{{ t }}</option>
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Tipo Recurso</label>
+          <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">Tipo Recurso</label>
           <select
             v-model="filtroTipoRecurso"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           >
             <option value="">Todos</option>
             <option v-for="r in recursosUnicos" :key="r" :value="r">{{ r }}</option>
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Área</label>
+          <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">Área</label>
           <select
             v-model="filtroArea"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           >
             <option value="">Todas</option>
             <option v-for="a in areasUnicas" :key="a" :value="a">{{ a }}</option>
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Município/Distrito</label>
+          <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">Município/Distrito</label>
           <select
             v-model="filtroMunicipio"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           >
             <option value="">Todos</option>
             <option v-for="m in municipiosUnicos" :key="m" :value="m">{{ m }}</option>
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Orgão Demandante</label>
+          <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">Orgão Demandante</label>
           <select
             v-model="filtroOrgao"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           >
             <option value="">Todos</option>
             <option v-for="o in orgaosUnicos" :key="o" :value="o">{{ o }}</option>
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">BPMs</label>
+          <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">BPMs</label>
           <select
             v-model="filtroOrganizacao"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           >
             <option value="">Todos</option>
             <option v-for="o in organizacoesUnicas" :key="o" :value="o">{{ o }}</option>
@@ -456,17 +456,18 @@ watch(
         </div>
       </div>
       <div class="mt-4 flex justify-end">
-        <button @click="limparFiltros" class="text-gray-500 hover:text-gray-700 text-sm">
+        <button @click="limparFiltros" class="text-(--color-text-muted) hover:text-(--color-text-secondary) text-sm">
           Limpar filtros
         </button>
       </div>
     </div>
 
     <div class="card p-4">
-      <h2 class="text-lg font-semibold text-gray-800 mb-1">
+<h2 class="text-lg font-semibold text-(--color-text-primary) mb-1">
         Mapa de Operações por Município — Rondônia
       </h2>
-      <p class="text-xs text-gray-400 mb-3">
+
+      <p class="text-xs text-(--color-text-muted) mb-3">
         Pontos azuis = municípios com operações (tamanho proporcional à quantidade). Pontos cinzas =
         sem operações. Clique para ver resumo.
       </p>
@@ -474,8 +475,8 @@ watch(
     </div>
 
     <div class="card overflow-hidden">
-      <div class="px-4 py-3 border-b border-gray-100 bg-gray-50/50">
-        <h3 class="text-lg font-semibold text-gray-800">Detalhamento de Operações</h3>
+      <div class="px-4 py-3 border-b border-(--color-border-subtle) bg-(--color-surface)/50">
+        <h3 class="text-lg font-semibold text-(--color-text-primary)">Detalhamento de Operações</h3>
       </div>
       <div class="table-container !border-0 !rounded-none !shadow-none">
         <table class="custom-table">
@@ -506,39 +507,39 @@ watch(
               <td>
                 <router-link
                   :to="`/operacoes/${op.id}`"
-                  class="text-[#1e3a5f] hover:underline font-medium"
+                  class="text-(--color-pmro) hover:underline font-medium"
                 >
                   {{ op.nomeOperacaoApoio }}
                 </router-link>
               </td>
-              <td class="text-gray-600">{{ op.municipio || "-" }}</td>
-              <td class="text-gray-600">{{ op.empregoPoliciciamento || "-" }}</td>
-              <td class="text-gray-600">{{ op.area || "-" }}</td>
-              <td class="text-gray-600">{{ op.orgaoDemandante || "-" }}</td>
-              <td class="text-gray-600">{{ op.qtdeEfetivo }}</td>
-              <td class="text-gray-600">{{ op.qtdeViaturas }}</td>
-              <td class="text-blue-600 font-medium">
+              <td class="text-(--color-text-secondary)">{{ op.municipio || "-" }}</td>
+              <td class="text-(--color-text-secondary)">{{ op.empregoPoliciciamento || "-" }}</td>
+              <td class="text-(--color-text-secondary)">{{ op.area || "-" }}</td>
+              <td class="text-(--color-text-secondary)">{{ op.orgaoDemandante || "-" }}</td>
+              <td class="text-(--color-text-secondary)">{{ op.qtdeEfetivo }}</td>
+              <td class="text-(--color-text-secondary)">{{ op.qtdeViaturas }}</td>
+              <td class="text-(--color-pmro-blue) font-medium">
                 {{ formatCurrency(calcularIndicadores(op).valorPorDia) }}
               </td>
-              <td class="text-purple-600 font-medium">
+              <td class="text-(--color-pmro-accent) font-medium">
                 {{ formatCurrency(calcularIndicadores(op).valorPorPessoa) }}
               </td>
-              <td class="text-orange-600 font-medium">
+              <td class="text-(--color-pmro-gold) font-medium">
                 {{ formatCurrency(calcularIndicadores(op).valorPorPessoaPorDia) }}
               </td>
-              <td class="text-gray-600">
+              <td class="text-(--color-text-secondary)">
                 {{ formatCurrency(op.recursoFinanceiroEmpregado) }}
               </td>
-              <td class="text-gray-600">
+              <td class="text-(--color-text-secondary)">
                 {{ op.comandoRegional || op.crp || "-" }}
               </td>
-              <td class="text-gray-600">
+              <td class="text-(--color-text-secondary)">
                 {{ op.organizacaoPolicialMilitar || "-" }}
               </td>
               <td>
                 <router-link
                   :to="`/operacoes/${op.id}`"
-                  class="text-[#1e3a5f] hover:text-[#0f2442] inline-flex items-center justify-center w-8 h-8 rounded-lg hover:bg-[#1e3a5f]/5 transition-colors"
+                  class="text-(--color-pmro) hover:text-(--color-pmro) inline-flex items-center justify-center w-8 h-8 rounded-lg hover:bg-(--color-pmro)/5 transition-colors"
                 >
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
@@ -560,11 +561,11 @@ watch(
           </tbody>
         </table>
       </div>
-      <div v-if="operacoesFiltradas.length === 0" class="py-12 text-center text-gray-500">
+      <div v-if="operacoesFiltradas.length === 0" class="py-12 text-center text-(--color-text-muted)">
         Nenhuma operação encontrada com os filtros selecionados.
       </div>
-      <div v-else class="flex items-center justify-between px-4 py-3 border-t border-gray-100">
-        <div class="text-sm text-gray-500">
+      <div v-else class="flex items-center justify-between px-4 py-3 border-t border-(--color-border-subtle)">
+        <div class="text-sm text-(--color-text-muted)">
           Mostrando {{ (paginaAtual - 1) * itensPorPagina + 1 }} -
           {{ Math.min(paginaAtual * itensPorPagina, operacoesFiltradas.length) }} de
           {{ operacoesFiltradas.length }} operações
@@ -573,7 +574,7 @@ watch(
           <button
             @click="irParaPagina(paginaAtual - 1)"
             :disabled="paginaAtual === 1"
-            class="px-3 py-1 text-sm rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            class="px-3 py-1 text-sm rounded-lg border border-(--color-border) hover:bg-(--color-surface-elevated) disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Anterior
           </button>
@@ -587,23 +588,23 @@ watch(
               @click="irParaPagina(pagina)"
               :class="
                 paginaAtual === pagina
-                  ? 'bg-[#1e3a5f] text-white'
-                  : 'text-gray-600 hover:bg-gray-50'
+                  ? 'bg-(--color-pmro) text-white'
+                  : 'text-(--color-text-secondary) hover:bg-(--color-surface-elevated)'
               "
-              class="px-3 py-1 text-sm rounded-lg border border-gray-300"
+              class="px-3 py-1 text-sm rounded-lg border border-(--color-border)"
             >
               {{ pagina }}
             </button>
             <span
               v-else-if="pagina === paginaAtual - 2 || pagina === paginaAtual + 2"
-              class="px-1 text-gray-400"
+              class="px-1 text-(--color-text-muted)"
               >...</span
             >
           </template>
           <button
             @click="irParaPagina(paginaAtual + 1)"
             :disabled="paginaAtual === totalPaginas"
-            class="px-3 py-1 text-sm rounded-lg border border-gray-300 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            class="px-3 py-1 text-sm rounded-lg border border-(--color-border) hover:bg-(--color-surface-elevated) disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Próxima
           </button>

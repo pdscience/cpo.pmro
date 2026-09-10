@@ -44,14 +44,14 @@ const formatDateTime = (dateStr: string) => new Date(dateStr).toLocaleString("pt
 
 const getAcaoColor = (acao: string) => {
   const colors: Record<string, string> = {
-    criar: "bg-green-100 text-green-700",
-    editar: "bg-blue-100 text-blue-700",
-    excluir: "bg-red-100 text-red-700",
-    visualizar: "bg-gray-100 text-gray-700",
-    aprobar: "bg-green-100 text-green-700",
-    rejeitar: "bg-red-100 text-red-700",
+    criar: "bg-(--color-success)/10 text-(--color-success)",
+    editar: "bg-(--color-pmro-blue)/10 text-(--color-pmro-blue)",
+    excluir: "bg-(--color-pmro-danger)/10 text-(--color-pmro-danger)",
+    visualizar: "bg-(--color-surface-elevated) text-(--color-text-secondary)",
+    aprobar: "bg-(--color-success)/10 text-(--color-success)",
+    rejeitar: "bg-(--color-pmro-danger)/10 text-(--color-pmro-danger)",
   };
-  return colors[acao] || "bg-gray-100 text-gray-700";
+  return colors[acao] || "bg-(--color-surface-elevated) text-(--color-text-secondary)";
 };
 
 const getAcaoLabel = (acao: string) => {
@@ -216,7 +216,7 @@ const confirmarImportacao = () => {
 };
 
 const inputClass =
-  "w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]";
+  "w-full border border-(--color-border) rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)";
 </script>
 
 <template>
@@ -226,7 +226,7 @@ const inputClass =
       <div class="card card-accent p-8">
         <div class="text-center mb-6">
           <div
-            class="w-16 h-16 bg-[#1e3a5f] rounded-full flex items-center justify-center mx-auto mb-4"
+            class="w-16 h-16 bg-(--color-pmro) rounded-full flex items-center justify-center mx-auto mb-4"
           >
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -237,13 +237,13 @@ const inputClass =
               />
             </svg>
           </div>
-          <h1 class="text-xl font-bold text-gray-900">Acesso Administrativo</h1>
-          <p class="text-sm text-gray-500 mt-1">Faça login para acessar as configurações</p>
+          <h1 class="text-xl font-bold text-(--color-text-primary)">Acesso Administrativo</h1>
+          <p class="text-sm text-(--color-text-muted) mt-1">Faça login para acessar as configurações</p>
         </div>
 
         <form @submit.prevent="adminLogin" class="space-y-4">
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">Email</label>
             <input
               v-model="adminEmail"
               type="email"
@@ -253,7 +253,7 @@ const inputClass =
             />
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+            <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">Senha</label>
             <input
               v-model="adminPassword"
               type="password"
@@ -262,17 +262,17 @@ const inputClass =
               required
             />
           </div>
-          <div v-if="loginError" class="text-red-600 text-sm text-center">{{ loginError }}</div>
+          <div v-if="loginError" class="text-(--color-pmro-danger) text-sm text-center">{{ loginError }}</div>
           <button
             type="submit"
-            class="w-full bg-[#1e3a5f] hover:bg-[#0f2442] text-white font-medium py-2.5 rounded-lg transition-colors"
+            class="w-full bg-(--color-pmro) hover:bg-(--color-pmro-blue) text-white font-medium py-2.5 rounded-lg transition-colors"
           >
             Entrar
           </button>
         </form>
 
-        <div class="mt-6 pt-6 border-t border-gray-100 text-center">
-          <router-link to="/" class="text-sm text-[#1e3a5f] hover:underline">
+        <div class="mt-6 pt-6 border-t border-(--color-border-subtle) text-center">
+          <router-link to="/" class="text-sm text-(--color-pmro) hover:underline">
             ← Voltar para o sistema
           </router-link>
         </div>
@@ -284,12 +284,12 @@ const inputClass =
       <!-- Header -->
       <div class="flex items-center justify-between">
         <div>
-          <h1 class="text-2xl font-bold text-gray-800">Administração</h1>
-          <p class="text-gray-500">Configurações e ferramentas administrativas</p>
+          <h1 class="text-2xl font-bold text-(--color-text-primary)">Administração</h1>
+          <p class="text-(--color-text-muted)">Configurações e ferramentas administrativas</p>
         </div>
         <button
           @click="adminLogout"
-          class="text-sm text-red-600 hover:underline flex items-center gap-1"
+          class="text-sm text-(--color-pmro-danger) hover:underline flex items-center gap-1"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
@@ -304,15 +304,15 @@ const inputClass =
       </div>
 
       <!-- Tabs -->
-      <div class="border-b border-gray-200">
+      <div class="border-b border-(--color-border)">
         <nav class="flex gap-6">
           <button
             @click="activeTab = 'api'"
             :class="[
               'py-3 px-1 border-b-2 font-medium text-sm transition-colors',
               activeTab === 'api'
-                ? 'border-[#1e3a5f] text-[#1e3a5f]'
-                : 'border-transparent text-gray-500 hover:text-gray-700',
+                ? 'border-(--color-pmro) text-(--color-pmro)'
+                : 'border-transparent text-(--color-text-muted) hover:text-(--color-text-secondary)',
             ]"
           >
             API Google Sheets
@@ -322,8 +322,8 @@ const inputClass =
             :class="[
               'py-3 px-1 border-b-2 font-medium text-sm transition-colors',
               activeTab === 'importar'
-                ? 'border-[#1e3a5f] text-[#1e3a5f]'
-                : 'border-transparent text-gray-500 hover:text-gray-700',
+                ? 'border-(--color-pmro) text-(--color-pmro)'
+                : 'border-transparent text-(--color-text-muted) hover:text-(--color-text-secondary)',
             ]"
           >
             Importar Dados
@@ -333,8 +333,8 @@ const inputClass =
             :class="[
               'py-3 px-1 border-b-2 font-medium text-sm transition-colors',
               activeTab === 'auditoria'
-                ? 'border-[#1e3a5f] text-[#1e3a5f]'
-                : 'border-transparent text-gray-500 hover:text-gray-700',
+                ? 'border-(--color-pmro) text-(--color-pmro)'
+                : 'border-transparent text-(--color-text-muted) hover:text-(--color-text-secondary)',
             ]"
           >
             Auditoria
@@ -345,14 +345,14 @@ const inputClass =
       <!-- API Tab -->
       <div v-if="activeTab === 'api'" class="space-y-6">
         <div class="card card-accent-blue p-6">
-          <h2 class="text-lg font-semibold text-gray-800 mb-4">Configuração da API</h2>
-          <p class="text-sm text-gray-500 mb-4">
+          <h2 class="text-lg font-semibold text-(--color-text-primary) mb-4">Configuração da API</h2>
+          <p class="text-sm text-(--color-text-muted) mb-4">
             Conecte o sistema à planilha Google Sheets para sincronização automática.
           </p>
 
           <div class="space-y-4">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">URL do Apps Script</label>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">URL do Apps Script</label>
               <input
                 v-model="apiUrl"
                 type="text"
@@ -363,22 +363,22 @@ const inputClass =
             <div class="flex gap-3">
               <button
                 @click="salvarUrl"
-                class="px-4 py-2 bg-[#1e3a5f] text-white rounded-lg text-sm font-medium hover:bg-[#0f2442] transition-colors"
+                class="px-4 py-2 bg-(--color-pmro) text-white rounded-lg text-sm font-medium hover:bg-(--color-pmro-blue) transition-colors"
               >
                 Salvar URL
               </button>
               <button
                 @click="sincronizarDados"
                 :disabled="sincronizando"
-                class="px-4 py-2 border border-[#1e3a5f] text-[#1e3a5f] rounded-lg text-sm font-medium hover:bg-[#1e3a5f]/5 transition-colors disabled:opacity-50"
+                class="px-4 py-2 border border-(--color-pmro) text-(--color-pmro) rounded-lg text-sm font-medium hover:bg-(--color-pmro)/5 transition-colors disabled:opacity-50"
               >
                 {{ sincronizando ? "Sincronizando..." : "Sincronizar Dados" }}
               </button>
             </div>
-            <div v-if="apiMessage" class="p-3 bg-green-50 text-green-700 rounded-lg text-sm">
+            <div v-if="apiMessage" class="p-3 bg-(--color-success)/10 text-(--color-success) rounded-lg text-sm">
               {{ apiMessage }}
             </div>
-            <div v-if="apiError" class="p-3 bg-red-50 text-red-700 rounded-lg text-sm">
+            <div v-if="apiError" class="p-3 bg-(--color-pmro-danger)/10 text-(--color-pmro-danger) rounded-lg text-sm">
               {{ apiError }}
             </div>
           </div>
@@ -388,10 +388,10 @@ const inputClass =
       <!-- Import Tab -->
       <div v-if="activeTab === 'importar'" class="space-y-6">
         <div class="card card-accent-purple p-6">
-          <h2 class="text-lg font-semibold text-gray-800 mb-4">Importar de Planilha Google</h2>
+          <h2 class="text-lg font-semibold text-(--color-text-primary) mb-4">Importar de Planilha Google</h2>
           <div class="space-y-4">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">URL do Apps Script</label>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">URL do Apps Script</label>
               <input
                 v-model="scriptUrl"
                 type="text"
@@ -402,7 +402,7 @@ const inputClass =
             <button
               @click="buscarDadosSheets"
               :disabled="loading"
-              class="px-4 py-2 bg-[#1e3a5f] text-white rounded-lg text-sm font-medium hover:bg-[#0f2442] transition-colors disabled:opacity-50"
+              class="px-4 py-2 bg-(--color-pmro) text-white rounded-lg text-sm font-medium hover:bg-(--color-pmro-blue) transition-colors disabled:opacity-50"
             >
               {{ loading ? "Buscando..." : "Buscar Dados" }}
             </button>
@@ -410,10 +410,10 @@ const inputClass =
         </div>
 
         <div class="card card-accent-purple p-6">
-          <h2 class="text-lg font-semibold text-gray-800 mb-4">Importar via JSON</h2>
+          <h2 class="text-lg font-semibold text-(--color-text-primary) mb-4">Importar via JSON</h2>
           <div class="space-y-4">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1"
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1"
                 >Cole os dados JSON aqui</label
               >
               <textarea
@@ -425,14 +425,14 @@ const inputClass =
             </div>
             <button
               @click="importarJson"
-              class="px-4 py-2 bg-[#1e3a5f] text-white rounded-lg text-sm font-medium hover:bg-[#0f2442] transition-colors"
+              class="px-4 py-2 bg-(--color-pmro) text-white rounded-lg text-sm font-medium hover:bg-(--color-pmro-blue) transition-colors"
             >
               Importar JSON
             </button>
-            <div v-if="importError" class="p-3 bg-red-50 text-red-700 rounded-lg text-sm">
+            <div v-if="importError" class="p-3 bg-(--color-pmro-danger)/10 text-(--color-pmro-danger) rounded-lg text-sm">
               {{ importError }}
             </div>
-            <div v-if="importResult" class="p-3 bg-green-50 text-green-700 rounded-lg text-sm">
+            <div v-if="importResult" class="p-3 bg-(--color-success)/10 text-(--color-success) rounded-lg text-sm">
               {{ importResult.sucesso }} operação(ões) importada(s),
               {{ importResult.erros }} erro(s).
             </div>
@@ -442,13 +442,13 @@ const inputClass =
         <!-- Preview data -->
         <div v-if="mostrandoDados && dadosImportar.length > 0" class="card p-6">
           <div class="flex items-center justify-between mb-4">
-            <h2 class="text-lg font-semibold text-gray-800">
+            <h2 class="text-lg font-semibold text-(--color-text-primary)">
               {{ dadosImportar.length }} registros encontrados
             </h2>
             <div class="flex gap-2">
               <button
                 @click="confirmarImportacao"
-                class="px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
+                class="px-4 py-2 bg-(--color-success) text-white rounded-lg text-sm font-medium hover:bg-(--color-success)/90 transition-colors"
               >
                 Confirmar Importação
               </button>
@@ -457,7 +457,7 @@ const inputClass =
                   mostrandoDados = false;
                   dadosImportar = [];
                 "
-                class="px-4 py-2 border border-gray-300 text-gray-600 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+                class="px-4 py-2 border border-(--color-border) text-(--color-text-secondary) rounded-lg text-sm font-medium hover:bg-(--color-surface-elevated) transition-colors"
               >
                 Cancelar
               </button>
@@ -467,13 +467,13 @@ const inputClass =
             <table class="custom-table custom-table-dense">
               <thead>
                 <tr>
-                  <th class="text-left py-2 px-2 text-xs font-semibold text-gray-500">Operação</th>
-                  <th class="text-left py-2 px-2 text-xs font-semibold text-gray-500">Município</th>
-                  <th class="text-left py-2 px-2 text-xs font-semibold text-gray-500">
+                  <th class="text-left py-2 px-2 text-xs font-semibold text-(--color-text-muted)">Operação</th>
+                  <th class="text-left py-2 px-2 text-xs font-semibold text-(--color-text-muted)">Município</th>
+                  <th class="text-left py-2 px-2 text-xs font-semibold text-(--color-text-muted)">
                     Data Início
                   </th>
-                  <th class="text-left py-2 px-2 text-xs font-semibold text-gray-500">Dias</th>
-                  <th class="text-left py-2 px-2 text-xs font-semibold text-gray-500">Efetivo</th>
+                  <th class="text-left py-2 px-2 text-xs font-semibold text-(--color-text-muted)">Dias</th>
+                  <th class="text-left py-2 px-2 text-xs font-semibold text-(--color-text-muted)">Efetivo</th>
                 </tr>
               </thead>
               <tbody>
@@ -495,11 +495,11 @@ const inputClass =
       <!-- Audit Tab -->
       <div v-if="activeTab === 'auditoria'" class="card p-6">
         <div class="flex items-center justify-between mb-4">
-          <h2 class="text-lg font-semibold text-gray-800">Histórico de Ações</h2>
-          <span class="text-sm text-gray-500">{{ auditoriaOrdenada.length }} registros</span>
+          <h2 class="text-lg font-semibold text-(--color-text-primary)">Histórico de Ações</h2>
+          <span class="text-sm text-(--color-text-muted)">{{ auditoriaOrdenada.length }} registros</span>
         </div>
 
-        <div v-if="auditoriaOrdenada.length === 0" class="text-center py-12 text-gray-500">
+        <div v-if="auditoriaOrdenada.length === 0" class="text-center py-12 text-(--color-text-muted)">
           Nenhuma ação registrada ainda.
         </div>
 
@@ -563,9 +563,9 @@ const inputClass =
                   </svg>
                 </div>
                 <div>
-                  <p class="font-medium text-gray-800">{{ getAcaoLabel(registro.acao) }}</p>
-                  <p class="text-sm text-gray-600">{{ getOperacaoNome(registro.operacaoId) }}</p>
-                  <p class="text-xs text-gray-400 mt-1">{{ formatDateTime(registro.timestamp) }}</p>
+                  <p class="font-medium text-(--color-text-primary)">{{ getAcaoLabel(registro.acao) }}</p>
+                  <p class="text-sm text-(--color-text-secondary)">{{ getOperacaoNome(registro.operacaoId) }}</p>
+                  <p class="text-xs text-(--color-text-muted) mt-1">{{ formatDateTime(registro.timestamp) }}</p>
                 </div>
               </div>
             </div>

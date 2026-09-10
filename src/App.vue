@@ -52,9 +52,9 @@ const logout = () => {
     <router-view />
   </div>
 
-  <div v-else class="min-h-screen bg-gray-100 flex">
-    <aside class="w-64 bg-[#1e3a5f] text-white flex flex-col">
-      <div class="p-4 border-b border-white/10">
+  <div v-else class="min-h-screen bg-(--color-bg) flex">
+    <aside class="w-64 bg-(--color-sidebar) text-(--color-sidebar-text) flex flex-col">
+      <div class="p-4 border-b border-(--color-border-subtle)">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,7 +68,7 @@ const logout = () => {
           </div>
           <div>
             <p class="font-bold">CPO</p>
-            <p class="text-xs text-white/70">Controle de Operações</p>
+            <p class="text-xs text-(--color-sidebar-text-muted)">Controle de Operações</p>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@ const logout = () => {
           :key="item.path"
           :to="item.path"
           class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors"
-          :class="route.path === item.path ? 'bg-white/20' : 'hover:bg-white/10'"
+          :class="route.path === item.path ? 'bg-(--color-sidebar-active)' : 'hover:bg-(--color-sidebar-hover)'"
         >
           <svg
             v-if="item.icon === 'dashboard'"
@@ -161,20 +161,20 @@ const logout = () => {
         </router-link>
       </nav>
 
-      <div class="p-4 border-t border-white/10">
+      <div class="p-4 border-t border-(--color-border-subtle)">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
-            <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+            <div class="w-8 h-8 bg-(--color-sidebar-hover) rounded-full flex items-center justify-center">
               <span class="text-sm font-medium">{{ store.usuarioAtual?.nome.charAt(0) }}</span>
             </div>
             <div class="text-sm">
               <p class="font-medium">{{ store.usuarioAtual?.nome }}</p>
-              <p class="text-xs text-white/70">
+              <p class="text-xs text-(--color-sidebar-text-muted)">
                 {{ store.usuarioAtual?.perfil.replace("_", " ") }}
               </p>
             </div>
           </div>
-          <button @click="logout" class="text-white/70 hover:text-white">
+          <button @click="logout" class="text-(--color-sidebar-text-muted) hover:text-(--color-sidebar-text)">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 stroke-linecap="round"

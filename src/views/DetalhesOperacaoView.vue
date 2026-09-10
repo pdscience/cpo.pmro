@@ -32,15 +32,15 @@ const formatDate = (dateStr: string) => new Date(dateStr).toLocaleDateString("pt
 const formatDateTime = (dateStr: string) => new Date(dateStr).toLocaleString("pt-BR");
 
 const statusConfig: Record<string, { bg: string; text: string; dot: string; label: string }> = {
-  rascunho: { bg: "bg-gray-100", text: "text-gray-700", dot: "bg-gray-400", label: "Rascunho" },
+  rascunho: { bg: "bg-(--color-surface-elevated)", text: "text-(--color-text-secondary)", dot: "bg-(--color-text-muted)", label: "Rascunho" },
   pendente: {
-    bg: "bg-yellow-100",
-    text: "text-yellow-700",
-    dot: "bg-yellow-400",
+    bg: "bg-(--color-warning)/10",
+    text: "text-(--color-warning)",
+    dot: "bg-(--color-warning)",
     label: "Pendente",
   },
-  aprovado: { bg: "bg-green-100", text: "text-green-700", dot: "bg-green-500", label: "Aprovado" },
-  rejeitado: { bg: "bg-red-100", text: "text-red-700", dot: "bg-red-500", label: "Rejeitado" },
+  aprovado: { bg: "bg-(--color-success)/10", text: "text-(--color-success)", dot: "bg-(--color-success)", label: "Aprovado" },
+  rejeitado: { bg: "bg-(--color-pmro-danger)/10", text: "text-(--color-pmro-danger)", dot: "bg-(--color-pmro-danger)", label: "Rejeitado" },
 };
 
 const sc = computed(() => statusConfig[operacao.value?.status ?? ""] ?? statusConfig["rascunho"]!);
@@ -127,7 +127,7 @@ watch(
     <!-- Header -->
     <div class="flex items-start justify-between">
       <div class="flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-[#1e3a5f] flex items-center justify-center shadow">
+        <div class="w-12 h-12 rounded-xl bg-(--color-pmro) flex items-center justify-center shadow">
           <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
@@ -138,7 +138,7 @@ watch(
           </svg>
         </div>
         <div>
-          <h1 class="text-2xl font-bold text-gray-900">{{ operacao.nomeOperacaoApoio }}</h1>
+          <h1 class="text-2xl font-bold text-(--color-text-primary)">{{ operacao.nomeOperacaoApoio }}</h1>
           <div class="flex items-center gap-3 mt-1">
             <span
               :class="[sc.bg, sc.text]"
@@ -147,7 +147,7 @@ watch(
               <span :class="sc.dot" class="w-1.5 h-1.5 rounded-full"></span>
               {{ sc.label }}
             </span>
-            <span class="text-sm text-gray-400"
+            <span class="text-sm text-(--color-text-muted)"
               >Criado em {{ formatDateTime(operacao.createdAt) }}</span
             >
           </div>
@@ -156,7 +156,7 @@ watch(
       <div class="flex items-center gap-2">
         <router-link
           to="/operacoes"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 text-gray-600 text-sm font-medium hover:bg-gray-50 transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-(--color-border) text-(--color-text-secondary) text-sm font-medium hover:bg-(--color-surface-elevated) transition-colors"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
@@ -175,9 +175,9 @@ watch(
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       <div class="card card-accent p-5 flex items-center gap-4">
         <div
-          class="w-11 h-11 rounded-lg bg-[#1e3a5f]/10 flex items-center justify-center flex-shrink-0"
+          class="w-11 h-11 rounded-lg bg-(--color-pmro)/10 flex items-center justify-center flex-shrink-0"
         >
-          <svg class="w-5 h-5 text-[#1e3a5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-(--color-pmro)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -187,15 +187,15 @@ watch(
           </svg>
         </div>
         <div>
-          <p class="text-xs text-gray-500 uppercase tracking-wide">Efetivo</p>
-          <p class="text-2xl font-bold text-gray-900">{{ operacao.qtdeEfetivo }}</p>
-          <p class="text-xs text-gray-400">policiais</p>
+          <p class="text-xs text-(--color-text-muted) uppercase tracking-wide">Efetivo</p>
+          <p class="text-2xl font-bold text-(--color-text-primary)">{{ operacao.qtdeEfetivo }}</p>
+          <p class="text-xs text-(--color-text-muted)">policiais</p>
         </div>
       </div>
 
       <div class="card card-accent-blue p-5 flex items-center gap-4">
-        <div class="w-11 h-11 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
-          <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="w-11 h-11 rounded-lg bg-(--color-pmro-blue)/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-(--color-pmro-blue)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -205,18 +205,18 @@ watch(
           </svg>
         </div>
         <div>
-          <p class="text-xs text-gray-500 uppercase tracking-wide">Viaturas</p>
-          <p class="text-2xl font-bold text-gray-900">{{ operacao.qtdeViaturas }}</p>
-          <p class="text-xs text-gray-400">veículos</p>
+          <p class="text-xs text-(--color-text-muted) uppercase tracking-wide">Viaturas</p>
+          <p class="text-2xl font-bold text-(--color-text-primary)">{{ operacao.qtdeViaturas }}</p>
+          <p class="text-xs text-(--color-text-muted)">veículos</p>
         </div>
       </div>
 
       <div class="card card-accent-purple p-5 flex items-center gap-4">
         <div
-          class="w-11 h-11 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0"
+          class="w-11 h-11 rounded-lg bg-(--color-pmro-accent)/10 flex items-center justify-center flex-shrink-0"
         >
           <svg
-            class="w-5 h-5 text-purple-600"
+            class="w-5 h-5 text-(--color-pmro-accent)"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -230,17 +230,17 @@ watch(
           </svg>
         </div>
         <div>
-          <p class="text-xs text-gray-500 uppercase tracking-wide">Duração</p>
-          <p class="text-2xl font-bold text-gray-900">{{ operacao.totalDias }}</p>
-          <p class="text-xs text-gray-400">dias</p>
+          <p class="text-xs text-(--color-text-muted) uppercase tracking-wide">Duração</p>
+          <p class="text-2xl font-bold text-(--color-text-primary)">{{ operacao.totalDias }}</p>
+          <p class="text-xs text-(--color-text-muted)">dias</p>
         </div>
       </div>
 
       <div class="card card-accent-green p-5 flex items-center gap-4">
         <div
-          class="w-11 h-11 rounded-lg bg-green-50 flex items-center justify-center flex-shrink-0"
+          class="w-11 h-11 rounded-lg bg-(--color-success)/10 flex items-center justify-center flex-shrink-0"
         >
-          <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-(--color-success)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -250,11 +250,11 @@ watch(
           </svg>
         </div>
         <div>
-          <p class="text-xs text-gray-500 uppercase tracking-wide">Recurso</p>
-          <p class="text-lg font-bold text-gray-900 leading-tight">
+          <p class="text-xs text-(--color-text-muted) uppercase tracking-wide">Recurso</p>
+          <p class="text-lg font-bold text-(--color-text-primary) leading-tight">
             {{ formatCurrency(operacao.recursoFinanceiroEmpregado) }}
           </p>
-          <p class="text-xs text-gray-400">empregado</p>
+          <p class="text-xs text-(--color-text-muted)">empregado</p>
         </div>
       </div>
     </div>
@@ -266,9 +266,9 @@ watch(
         <!-- Dados da Operação -->
         <div class="card card-accent p-6">
           <div class="flex items-center gap-2 mb-5">
-            <div class="w-8 h-8 rounded-lg bg-[#1e3a5f]/10 flex items-center justify-center">
+            <div class="w-8 h-8 rounded-lg bg-(--color-pmro)/10 flex items-center justify-center">
               <svg
-                class="w-4 h-4 text-[#1e3a5f]"
+                class="w-4 h-4 text-(--color-pmro)"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -281,40 +281,40 @@ watch(
                 />
               </svg>
             </div>
-            <h2 class="text-base font-semibold text-gray-800">Dados da Operação</h2>
+            <h2 class="text-base font-semibold text-(--color-text-primary)">Dados da Operação</h2>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             <div class="space-y-1">
-              <p class="text-xs font-medium text-gray-400 uppercase tracking-wide">
+              <p class="text-xs font-medium text-(--color-text-muted) uppercase tracking-wide">
                 Data de Início
               </p>
-              <p class="text-sm font-semibold text-gray-800">
+              <p class="text-sm font-semibold text-(--color-text-primary)">
                 {{ formatDate(operacao.diaInicio) }}
               </p>
             </div>
             <div class="space-y-1">
-              <p class="text-xs font-medium text-gray-400 uppercase tracking-wide">Total de Dias</p>
-              <p class="text-sm font-semibold text-gray-800">{{ operacao.totalDias }} dias</p>
+              <p class="text-xs font-medium text-(--color-text-muted) uppercase tracking-wide">Total de Dias</p>
+              <p class="text-sm font-semibold text-(--color-text-primary)">{{ operacao.totalDias }} dias</p>
             </div>
             <div class="space-y-1">
-              <p class="text-xs font-medium text-gray-400 uppercase tracking-wide">Área</p>
+              <p class="text-xs font-medium text-(--color-text-muted) uppercase tracking-wide">Área</p>
               <span
                 class="inline-block px-2 py-0.5 rounded text-xs font-medium"
                 :class="
                   operacao.area === 'URBANA'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'bg-green-100 text-green-700'
+                    ? 'bg-(--color-pmro-blue)/10 text-(--color-pmro-blue)'
+                    : 'bg-(--color-success)/10 text-(--color-success)'
                 "
               >
                 {{ operacao.area || "-" }}
               </span>
             </div>
             <div class="space-y-1">
-              <p class="text-xs font-medium text-gray-400 uppercase tracking-wide">Município</p>
-              <p class="text-sm font-semibold text-gray-800 flex items-center gap-1">
+              <p class="text-xs font-medium text-(--color-text-muted) uppercase tracking-wide">Município</p>
+              <p class="text-sm font-semibold text-(--color-text-primary) flex items-center gap-1">
                 <svg
-                  class="w-3.5 h-3.5 text-gray-400"
+                  class="w-3.5 h-3.5 text-(--color-text-muted)"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -336,52 +336,52 @@ watch(
               </p>
             </div>
             <div class="space-y-1">
-              <p class="text-xs font-medium text-gray-400 uppercase tracking-wide">
+              <p class="text-xs font-medium text-(--color-text-muted) uppercase tracking-wide">
                 Emprego de Policiamento
               </p>
-              <p class="text-sm font-semibold text-gray-800">
+              <p class="text-sm font-semibold text-(--color-text-primary)">
                 {{ operacao.empregoPoliciciamento || "-" }}
               </p>
             </div>
             <div class="space-y-1">
-              <p class="text-xs font-medium text-gray-400 uppercase tracking-wide">
+              <p class="text-xs font-medium text-(--color-text-muted) uppercase tracking-wide">
                 Org. Policial Militar
               </p>
-              <p class="text-sm font-semibold text-gray-800">
+              <p class="text-sm font-semibold text-(--color-text-primary)">
                 {{ operacao.organizacaoPolicialMilitar || "-" }}
               </p>
             </div>
             <div class="space-y-1">
-              <p class="text-xs font-medium text-gray-400 uppercase tracking-wide">
+              <p class="text-xs font-medium text-(--color-text-muted) uppercase tracking-wide">
                 Órgão Demandante
               </p>
-              <p class="text-sm font-semibold text-gray-800">
+              <p class="text-sm font-semibold text-(--color-text-primary)">
                 {{ operacao.orgaoDemandante || "-" }}
               </p>
             </div>
             <div class="space-y-1">
-              <p class="text-xs font-medium text-gray-400 uppercase tracking-wide">
+              <p class="text-xs font-medium text-(--color-text-muted) uppercase tracking-wide">
                 CRP / Comando Regional
               </p>
-              <p class="text-sm font-semibold text-gray-800">
+              <p class="text-sm font-semibold text-(--color-text-primary)">
                 {{ operacao.comandoRegional || operacao.crp || "-" }}
               </p>
             </div>
             <div class="space-y-1">
-              <p class="text-xs font-medium text-gray-400 uppercase tracking-wide">
+              <p class="text-xs font-medium text-(--color-text-muted) uppercase tracking-wide">
                 Tipo de Recurso
               </p>
-              <p class="text-sm font-semibold text-gray-800">{{ operacao.tipoRecurso || "-" }}</p>
+              <p class="text-sm font-semibold text-(--color-text-primary)">{{ operacao.tipoRecurso || "-" }}</p>
             </div>
             <div class="space-y-1">
-              <p class="text-xs font-medium text-gray-400 uppercase tracking-wide">Nº SEI</p>
-              <p class="text-sm font-mono font-medium text-[#1e3a5f]">
+              <p class="text-xs font-medium text-(--color-text-muted) uppercase tracking-wide">Nº SEI</p>
+              <p class="text-sm font-mono font-medium text-(--color-pmro)">
                 {{ operacao.numeroSei || "-" }}
               </p>
             </div>
             <div class="space-y-1">
-              <p class="text-xs font-medium text-gray-400 uppercase tracking-wide">Cód. SISEG</p>
-              <p class="text-sm font-mono font-medium text-[#1e3a5f]">
+              <p class="text-xs font-medium text-(--color-text-muted) uppercase tracking-wide">Cód. SISEG</p>
+              <p class="text-sm font-mono font-medium text-(--color-pmro)">
                 {{ operacao.codOperacaoSiseg || "-" }}
               </p>
             </div>
@@ -391,9 +391,9 @@ watch(
         <!-- Mapa da Operação -->
         <div class="card card-accent-blue p-6">
           <div class="flex items-center gap-2 mb-4">
-            <div class="w-8 h-8 rounded-lg bg-[#1e3a5f]/10 flex items-center justify-center">
+            <div class="w-8 h-8 rounded-lg bg-(--color-pmro)/10 flex items-center justify-center">
               <svg
-                class="w-4 h-4 text-[#1e3a5f]"
+                class="w-4 h-4 text-(--color-pmro)"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -413,8 +413,8 @@ watch(
               </svg>
             </div>
             <div>
-              <h2 class="text-base font-semibold text-gray-800">Localização da Operação</h2>
-              <p class="text-xs text-gray-400">
+              <h2 class="text-base font-semibold text-(--color-text-primary)">Localização da Operação</h2>
+              <p class="text-xs text-(--color-text-muted)">
                 {{ operacao.municipio || "Município não informado" }} —
                 {{ formatDate(operacao.diaInicio) }}
                 <span v-if="operacao.totalDias > 1">
@@ -434,9 +434,9 @@ watch(
 
           <div
             v-if="!coordsMunicipio"
-            class="flex items-center justify-center h-48 rounded-lg bg-gray-50 border border-dashed border-gray-200"
+            class="flex items-center justify-center h-48 rounded-lg bg-(--color-surface-elevated) border border-dashed border-(--color-border)"
           >
-            <div class="text-center text-gray-400">
+            <div class="text-center text-(--color-text-muted)">
               <svg
                 class="w-8 h-8 mx-auto mb-2"
                 fill="none"
@@ -463,9 +463,9 @@ watch(
         <!-- Indicadores -->
         <div class="card card-accent-blue p-6 flex flex-col flex-1">
           <div class="flex items-center gap-2 mb-5">
-            <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
+            <div class="w-8 h-8 rounded-lg bg-(--color-pmro-blue)/10 flex items-center justify-center">
               <svg
-                class="w-4 h-4 text-blue-600"
+                class="w-4 h-4 text-(--color-pmro-blue)"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -478,42 +478,42 @@ watch(
                 />
               </svg>
             </div>
-            <h2 class="text-base font-semibold text-gray-800">Indicadores</h2>
+            <h2 class="text-base font-semibold text-(--color-text-primary)">Indicadores</h2>
           </div>
 
           <div class="flex flex-col gap-3 flex-1 justify-between">
             <div
-              class="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-100"
+              class="flex items-center justify-between p-3 bg-(--color-pmro-blue)/10 rounded-lg border border-(--color-pmro-blue)/20"
             >
               <div>
-                <p class="text-xs text-blue-600 font-medium">Valor por Dia</p>
-                <p class="text-xs text-blue-400">Recurso ÷ Dias</p>
+                <p class="text-xs text-(--color-pmro-blue) font-medium">Valor por Dia</p>
+                <p class="text-xs text-(--color-pmro-blue)/70">Recurso ÷ Dias</p>
               </div>
-              <p class="text-base font-bold text-blue-800">
+              <p class="text-base font-bold text-(--color-pmro-blue)">
                 {{ indicadoresOp ? formatCurrency(indicadoresOp.valorPorDia) : "R$ 0,00" }}
               </p>
             </div>
 
             <div
-              class="flex items-center justify-between p-3 bg-purple-50 rounded-lg border border-purple-100"
+              class="flex items-center justify-between p-3 bg-(--color-pmro-accent)/10 rounded-lg border border-(--color-pmro-accent)/20"
             >
               <div>
-                <p class="text-xs text-purple-600 font-medium">Valor por Pessoa</p>
-                <p class="text-xs text-purple-400">Recurso ÷ Efetivo</p>
+                <p class="text-xs text-(--color-pmro-accent) font-medium">Valor por Pessoa</p>
+                <p class="text-xs text-(--color-pmro-accent)/70">Recurso ÷ Efetivo</p>
               </div>
-              <p class="text-base font-bold text-purple-800">
+              <p class="text-base font-bold text-(--color-pmro-accent)">
                 {{ indicadoresOp ? formatCurrency(indicadoresOp.valorPorPessoa) : "R$ 0,00" }}
               </p>
             </div>
 
             <div
-              class="flex items-center justify-between p-3 bg-orange-50 rounded-lg border border-orange-100"
+              class="flex items-center justify-between p-3 bg-(--color-pmro-gold)/10 rounded-lg border border-(--color-pmro-gold)/20"
             >
               <div>
-                <p class="text-xs text-orange-600 font-medium">Valor/Pessoa/Dia</p>
-                <p class="text-xs text-orange-400">Recurso ÷ (Ef × Dias)</p>
+                <p class="text-xs text-(--color-pmro-gold) font-medium">Valor/Pessoa/Dia</p>
+                <p class="text-xs text-(--color-pmro-gold)/70">Recurso ÷ (Ef × Dias)</p>
               </div>
-              <p class="text-base font-bold text-orange-800">
+              <p class="text-base font-bold text-(--color-pmro-gold)">
                 {{ indicadoresOp ? formatCurrency(indicadoresOp.valorPorPessoaPorDia) : "R$ 0,00" }}
               </p>
             </div>
@@ -522,7 +522,7 @@ watch(
 
         <!-- Aprovações -->
         <div v-if="podeAprovar" class="card card-accent-green p-6">
-          <h2 class="text-base font-semibold text-gray-800 mb-4">Aprovação</h2>
+          <h2 class="text-base font-semibold text-(--color-text-primary) mb-4">Aprovação</h2>
           <div class="space-y-3">
             <button
               @click="
@@ -530,7 +530,7 @@ watch(
                   if (operacao) store.aprovarOperacao(operacao.id);
                 }
               "
-              class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+              class="w-full bg-(--color-success) hover:bg-(--color-success) text-white font-medium py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -548,7 +548,7 @@ watch(
                   if (operacao) store.rejeitarOperacao(operacao.id);
                 }
               "
-              class="w-full bg-red-600 hover:bg-red-700 text-white font-medium py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+              class="w-full bg-(--color-pmro-danger) hover:bg-(--color-pmro-danger) text-white font-medium py-2.5 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -566,9 +566,9 @@ watch(
         <!-- Auditoria -->
         <div class="card p-6 flex-1">
           <div class="flex items-center gap-2 mb-4">
-            <div class="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
+            <div class="w-8 h-8 rounded-lg bg-(--color-surface-elevated) flex items-center justify-center">
               <svg
-                class="w-4 h-4 text-gray-500"
+                class="w-4 h-4 text-(--color-text-muted)"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -581,16 +581,16 @@ watch(
                 />
               </svg>
             </div>
-            <h2 class="text-base font-semibold text-gray-800">Auditoria</h2>
+            <h2 class="text-base font-semibold text-(--color-text-primary)">Auditoria</h2>
           </div>
 
           <div class="space-y-3 text-sm">
-            <div class="flex items-start gap-3 pb-3 border-b border-gray-50">
+            <div class="flex items-start gap-3 pb-3 border-b border-(--color-border-subtle)">
               <div
-                class="w-7 h-7 rounded-full bg-[#1e3a5f]/10 flex items-center justify-center flex-shrink-0 mt-0.5"
+                class="w-7 h-7 rounded-full bg-(--color-pmro)/10 flex items-center justify-center flex-shrink-0 mt-0.5"
               >
                 <svg
-                  class="w-3.5 h-3.5 text-[#1e3a5f]"
+                  class="w-3.5 h-3.5 text-(--color-pmro)"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -604,17 +604,17 @@ watch(
                 </svg>
               </div>
               <div>
-                <p class="text-xs text-gray-400">Criado por</p>
-                <p class="font-medium text-gray-800">{{ operacao.createdBy }}</p>
-                <p class="text-xs text-gray-400">{{ formatDateTime(operacao.createdAt) }}</p>
+                <p class="text-xs text-(--color-text-muted)">Criado por</p>
+                <p class="font-medium text-(--color-text-primary)">{{ operacao.createdBy }}</p>
+                <p class="text-xs text-(--color-text-muted)">{{ formatDateTime(operacao.createdAt) }}</p>
               </div>
             </div>
             <div class="flex items-start gap-3">
               <div
-                class="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 mt-0.5"
+                class="w-7 h-7 rounded-full bg-(--color-surface-elevated) flex items-center justify-center flex-shrink-0 mt-0.5"
               >
                 <svg
-                  class="w-3.5 h-3.5 text-gray-500"
+                  class="w-3.5 h-3.5 text-(--color-text-muted)"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -628,9 +628,9 @@ watch(
                 </svg>
               </div>
               <div>
-                <p class="text-xs text-gray-400">Última alteração por</p>
-                <p class="font-medium text-gray-800">{{ operacao.updatedBy }}</p>
-                <p class="text-xs text-gray-400">{{ formatDateTime(operacao.updatedAt) }}</p>
+                <p class="text-xs text-(--color-text-muted)">Última alteração por</p>
+                <p class="font-medium text-(--color-text-primary)">{{ operacao.updatedBy }}</p>
+                <p class="text-xs text-(--color-text-muted)">{{ formatDateTime(operacao.updatedAt) }}</p>
               </div>
             </div>
           </div>
@@ -640,8 +640,8 @@ watch(
   </div>
 
   <div v-else class="text-center py-16">
-    <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
-      <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="w-16 h-16 rounded-full bg-(--color-surface-elevated) flex items-center justify-center mx-auto mb-4">
+      <svg class="w-8 h-8 text-(--color-text-muted)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -650,8 +650,8 @@ watch(
         />
       </svg>
     </div>
-    <p class="text-gray-500 font-medium">Operação não encontrada.</p>
-    <router-link to="/operacoes" class="text-[#1e3a5f] hover:underline mt-2 inline-block text-sm">
+    <p class="text-(--color-text-muted) font-medium">Operação não encontrada.</p>
+    <router-link to="/operacoes" class="text-(--color-pmro) hover:underline mt-2 inline-block text-sm">
       Voltar para lista
     </router-link>
   </div>

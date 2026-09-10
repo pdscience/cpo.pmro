@@ -68,10 +68,10 @@ const usarDadosLocais = () => {
   <div class="space-y-6">
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-gray-800">Configurações da API</h1>
-        <p class="text-gray-500">Conecte o sistema à planilha Google Sheets</p>
+        <h1 class="text-2xl font-bold text-(--color-text-primary)">Configurações da API</h1>
+        <p class="text-(--color-text-muted)">Conecte o sistema à planilha Google Sheets</p>
       </div>
-      <router-link to="/operacoes" class="text-gray-500 hover:text-gray-700 flex items-center gap-2">
+      <router-link to="/operacoes" class="text-(--color-text-muted) hover:text-(--color-text-secondary) flex items-center gap-2">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
@@ -80,11 +80,11 @@ const usarDadosLocais = () => {
     </div>
 
     <div class="card card-accent-blue p-4">
-      <h3 class="font-semibold text-blue-800 mb-2">Como obter a URL da API:</h3>
-      <ol class="list-decimal list-inside text-sm text-blue-700 space-y-1">
+      <h3 class="font-semibold text-(--color-pmro-blue) mb-2">Como obter a URL da API:</h3>
+      <ol class="list-decimal list-inside text-sm text-(--color-pmro-blue) space-y-1">
         <li>Abra sua planilha no Google Sheets</li>
         <li>Vá em <strong>Extensões → Apps Script</strong></li>
-        <li>Copie o código do arquivo <code class="bg-blue-100 px-1 rounded">docs/api_sheets.gs</code></li>
+        <li>Copie o código do arquivo <code class="bg-(--color-pmro-blue)/10 px-1 rounded">docs/api_sheets.gs</code></li>
         <li>Cole no Apps Script e salve (Ctrl+S)</li>
         <li>Vá em <strong>Publicar → Implantar como API da Web</strong></li>
         <li>Execute como: <strong>Eu</strong> | Acesso: <strong>Qualquer pessoa</strong></li>
@@ -93,28 +93,28 @@ const usarDadosLocais = () => {
     </div>
 
     <div class="card card-accent-purple p-6">
-      <label class="block text-sm font-medium text-gray-700 mb-2">
+      <label class="block text-sm font-medium text-(--color-text-secondary) mb-2">
         URL da API do Google Sheets:
       </label>
       <input 
         v-model="apiUrl"
         type="url" 
         placeholder="https://script.google.com/macros/s/.../exec"
-        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+        class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
       />
       
-      <div v-if="erro" class="mt-2 text-red-600 text-sm">
+      <div v-if="erro" class="mt-2 text-(--color-pmro-danger) text-sm">
         {{ erro }}
       </div>
       
-      <div v-if="mensagem" class="mt-2 text-green-600 text-sm">
+      <div v-if="mensagem" class="mt-2 text-(--color-success) text-sm">
         {{ mensagem }}
       </div>
 
       <div class="mt-4 flex gap-3">
         <button 
           @click="salvarUrl"
-          class="bg-[#1e3a5f] hover:bg-[#0f2442] text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
+          class="bg-(--color-pmro) hover:bg-(--color-pmro-blue) text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
@@ -125,7 +125,7 @@ const usarDadosLocais = () => {
         <button 
           @click="sincronizarDados"
           :disabled="sincronizando"
-          class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50"
+          class="bg-(--color-success) hover:bg-(--color-success)/90 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50"
         >
           <svg v-if="!sincronizando" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -138,16 +138,16 @@ const usarDadosLocais = () => {
 
         <button 
           @click="usarDadosLocais"
-          class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
+          class="bg-(--color-surface-elevated) hover:bg-(--color-border) text-(--color-text-secondary) px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
         >
           Usar Dados Locais
         </button>
       </div>
     </div>
 
-    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-      <h3 class="font-semibold text-yellow-800 mb-2">Nota Importante:</h3>
-      <p class="text-sm text-yellow-700">
+    <div class="bg-(--color-warning)/10 border border-(--color-warning)/20 rounded-lg p-4">
+      <h3 class="font-semibold text-(--color-warning) mb-2">Nota Importante:</h3>
+      <p class="text-sm text-(--color-warning)">
         A sincronização importa dados da planilha para o sistema. 
         Para salvar alterações de volta na planilha, você precisará usar a função 
         de exportar ou modificar o sistema para enviar alterações automaticamente.

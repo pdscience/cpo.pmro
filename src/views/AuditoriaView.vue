@@ -16,14 +16,14 @@ const formatDateTime = (dateStr: string) => {
 
 const getAcaoColor = (acao: string) => {
   const colors: Record<string, string> = {
-    criar: 'bg-green-100 text-green-700',
-    editar: 'bg-blue-100 text-blue-700',
-    excluir: 'bg-red-100 text-red-700',
-    visualizar: 'bg-gray-100 text-gray-700',
-    aprobar: 'bg-green-100 text-green-700',
-    rejeitar: 'bg-red-100 text-red-700'
+    criar: 'bg-(--color-success)/10 text-(--color-success)',
+    editar: 'bg-(--color-pmro-blue)/10 text-(--color-pmro-blue)',
+    excluir: 'bg-(--color-pmro-danger)/10 text-(--color-pmro-danger)',
+    visualizar: 'bg-(--color-surface-elevated) text-(--color-text-secondary)',
+    aprobar: 'bg-(--color-success)/10 text-(--color-success)',
+    rejeitar: 'bg-(--color-pmro-danger)/10 text-(--color-pmro-danger)'
   }
-  return colors[acao] || 'bg-gray-100 text-gray-700'
+  return colors[acao] || 'bg-(--color-surface-elevated) text-(--color-text-secondary)'
 }
 
 const getAcaoLabel = (acao: string) => {
@@ -48,18 +48,18 @@ const getOperacaoNome = (operacaoId: string) => {
   <div class="space-y-6">
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-gray-800">Trilha de Auditoria</h1>
-        <p class="text-gray-500">Registro de todas as ações realizadas no sistema</p>
+        <h1 class="text-2xl font-bold text-(--color-text-primary)">Trilha de Auditoria</h1>
+        <p class="text-(--color-text-muted)">Registro de todas as ações realizadas no sistema</p>
       </div>
     </div>
 
     <div class="card card-accent p-6">
       <div class="flex items-center justify-between mb-4">
-        <h2 class="text-lg font-semibold text-gray-800">Histórico de Ações</h2>
-        <span class="text-sm text-gray-500">{{ auditoriaOrdenada.length }} registros</span>
+        <h2 class="text-lg font-semibold text-(--color-text-primary)">Histórico de Ações</h2>
+        <span class="text-sm text-(--color-text-muted)">{{ auditoriaOrdenada.length }} registros</span>
       </div>
 
-      <div v-if="auditoriaOrdenada.length === 0" class="text-center py-12 text-gray-500">
+      <div v-if="auditoriaOrdenada.length === 0" class="text-center py-12 text-(--color-text-muted)">
         Nenhuma ação registrada ainda.
       </div>
 
@@ -97,13 +97,13 @@ const getOperacaoNome = (operacaoId: string) => {
                   <span :class="getAcaoColor(registro.acao)" class="px-2 py-0.5 rounded-full text-xs font-medium">
                     {{ getAcaoLabel(registro.acao) }}
                   </span>
-                  <span class="text-sm text-gray-500">{{ formatDateTime(registro.timestamp) }}</span>
+                  <span class="text-sm text-(--color-text-muted)">{{ formatDateTime(registro.timestamp) }}</span>
                 </div>
                 <p class="text-sm mt-1">
-                  <span class="text-gray-500">Operação:</span>
-                  <span class="font-medium text-gray-800"> {{ getOperacaoNome(registro.operacaoId) }}</span>
+                  <span class="text-(--color-text-muted)">Operação:</span>
+                  <span class="font-medium text-(--color-text-primary)"> {{ getOperacaoNome(registro.operacaoId) }}</span>
                 </p>
-                <p class="text-sm text-gray-500">
+                <p class="text-sm text-(--color-text-muted)">
                   <span>Usuário: {{ registro.usuarioId }}</span>
                   <span class="mx-2">|</span>
                   <span>IP: {{ registro.ip }}</span>
@@ -114,16 +114,16 @@ const getOperacaoNome = (operacaoId: string) => {
 
           <div v-if="registro.dadosAnteriores || registro.dadosNovos" class="mt-3 pl-13">
             <details class="text-sm">
-              <summary class="cursor-pointer text-[#1e3a5f] hover:text-[#0f2442]">
+              <summary class="cursor-pointer text-(--color-pmro) hover:text-(--color-pmro-blue)">
                 Ver detalhes das alterações
               </summary>
               <div class="mt-2 grid grid-cols-2 gap-4">
-                <div v-if="registro.dadosAnteriores" class="bg-red-50 p-3 rounded">
-                  <p class="font-medium text-red-700 mb-1">Antes</p>
+                <div v-if="registro.dadosAnteriores" class="bg-(--color-pmro-danger)/10 p-3 rounded">
+                  <p class="font-medium text-(--color-pmro-danger) mb-1">Antes</p>
                   <pre class="text-xs overflow-x-auto">{{ JSON.stringify(registro.dadosAnteriores, null, 2) }}</pre>
                 </div>
-                <div v-if="registro.dadosNovos" class="bg-green-50 p-3 rounded">
-                  <p class="font-medium text-green-700 mb-1">Depois</p>
+                <div v-if="registro.dadosNovos" class="bg-(--color-success)/10 p-3 rounded">
+                  <p class="font-medium text-(--color-success) mb-1">Depois</p>
                   <pre class="text-xs overflow-x-auto">{{ JSON.stringify(registro.dadosNovos, null, 2) }}</pre>
                 </div>
               </div>

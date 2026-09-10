@@ -108,12 +108,12 @@ const salvar = async (status: "rascunho" | "pendente") => {
   <div class="space-y-6">
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-gray-800">Nova Operação</h1>
-        <p class="text-gray-500">Cadastrar nova operação policial</p>
+        <h1 class="text-2xl font-bold text-(--color-text-primary)">Nova Operação</h1>
+        <p class="text-(--color-text-muted)">Cadastrar nova operação policial</p>
       </div>
       <router-link
         to="/operacoes"
-        class="text-gray-500 hover:text-gray-700 flex items-center gap-2"
+        class="text-(--color-text-muted) hover:text-(--color-text-secondary) flex items-center gap-2"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
@@ -127,8 +127,8 @@ const salvar = async (status: "rascunho" | "pendente") => {
       </router-link>
     </div>
 
-    <div v-if="erros.length > 0" class="bg-red-50 border border-red-200 rounded-lg p-4">
-      <ul class="list-disc list-inside text-red-700">
+    <div v-if="erros.length > 0" class="bg-(--color-pmro-danger)/10 border border-(--color-pmro-danger)/30 rounded-lg p-4">
+      <ul class="list-disc list-inside text-(--color-pmro-danger)">
         <li v-for="erro in erros" :key="erro">{{ erro }}</li>
       </ul>
     </div>
@@ -136,39 +136,39 @@ const salvar = async (status: "rascunho" | "pendente") => {
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <div class="lg:col-span-2 space-y-6">
         <div class="card card-accent-blue p-6">
-          <h2 class="text-lg font-semibold text-gray-800 mb-4">Dados da Operação</h2>
+          <h2 class="text-lg font-semibold text-(--color-text-primary) mb-4">Dados da Operação</h2>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                DATA DE INÍCIO <span class="text-red-500">*</span>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">
+                DATA DE INÍCIO <span class="text-(--color-pmro-danger)">*</span>
               </label>
               <input
                 v-model="form.diaInicio"
                 type="date"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+                class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
               />
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                TOTAL DE DIAS <span class="text-red-500">*</span>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">
+                TOTAL DE DIAS <span class="text-(--color-pmro-danger)">*</span>
               </label>
               <input
                 v-model.number="form.totalDias"
                 type="number"
                 min="1"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+                class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
               />
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                ORGANIZAÇÃO POLICIAL MILITAR <span class="text-red-500">*</span>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">
+                ORGANIZAÇÃO POLICIAL MILITAR <span class="text-(--color-pmro-danger)">*</span>
               </label>
               <select
                 v-model="form.organizacaoPolicialMilitar"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+                class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
               >
                 <option value="">Selecione</option>
                 <option v-for="op in store.organizacoesPoliciais" :key="op" :value="op">
@@ -178,12 +178,12 @@ const salvar = async (status: "rascunho" | "pendente") => {
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                MUNICÍPIO <span class="text-red-500">*</span>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">
+                MUNICÍPIO <span class="text-(--color-pmro-danger)">*</span>
               </label>
               <select
                 v-model="form.municipio"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+                class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
               >
                 <option value="">Selecione</option>
                 <option v-for="m in store.municipios" :key="m" :value="m">{{ m }}</option>
@@ -191,12 +191,12 @@ const salvar = async (status: "rascunho" | "pendente") => {
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                EMPREGO DE POLICIAMENTO <span class="text-red-500">*</span>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">
+                EMPREGO DE POLICIAMENTO <span class="text-(--color-pmro-danger)">*</span>
               </label>
               <select
                 v-model="form.empregoPoliciciamento"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+                class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
               >
                 <option value="">Selecione</option>
                 <option v-for="e in store.empregosPoliciciamento" :key="e" :value="e">
@@ -206,12 +206,12 @@ const salvar = async (status: "rascunho" | "pendente") => {
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                ÁREA <span class="text-red-500">*</span>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">
+                ÁREA <span class="text-(--color-pmro-danger)">*</span>
               </label>
               <select
                 v-model="form.area"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+                class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
               >
                 <option value="">Selecione</option>
                 <option v-for="a in store.areas" :key="a" :value="a">{{ a }}</option>
@@ -219,24 +219,24 @@ const salvar = async (status: "rascunho" | "pendente") => {
             </div>
 
             <div class="md:col-span-2">
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                NOME DA OPERAÇÃO/APOIO <span class="text-red-500">*</span>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">
+                NOME DA OPERAÇÃO/APOIO <span class="text-(--color-pmro-danger)">*</span>
               </label>
               <input
                 v-model="form.nomeOperacaoApoio"
                 type="text"
                 placeholder="Ex: Operação Guardião de Fronteiras"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+                class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
               />
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                ÓRGÃO DEMANDANTE <span class="text-red-500">*</span>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">
+                ÓRGÃO DEMANDANTE <span class="text-(--color-pmro-danger)">*</span>
               </label>
               <select
                 v-model="form.orgaoDemandante"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+                class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
               >
                 <option value="">Selecione</option>
                 <option v-for="o in store.orgaosDemandantes" :key="o" :value="o">{{ o }}</option>
@@ -244,82 +244,82 @@ const salvar = async (status: "rascunho" | "pendente") => {
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                Nº SEI <span class="text-red-500">*</span>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">
+                Nº SEI <span class="text-(--color-pmro-danger)">*</span>
               </label>
               <input
                 v-model="form.numeroSei"
                 type="text"
                 placeholder="Ex: 2025.0001.000001-00"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+                class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
               />
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                CÓD. OPERAÇÃO SISEG <span class="text-red-500">*</span>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">
+                CÓD. OPERAÇÃO SISEG <span class="text-(--color-pmro-danger)">*</span>
               </label>
               <input
                 v-model="form.codOperacaoSiseg"
                 type="text"
                 placeholder="Ex: SISEG-2025-001"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+                class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
               />
             </div>
           </div>
         </div>
 
         <div class="card card-accent-blue p-6">
-          <h2 class="text-lg font-semibold text-gray-800 mb-4">Recursos Empregados</h2>
+          <h2 class="text-lg font-semibold text-(--color-text-primary) mb-4">Recursos Empregados</h2>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                QTDE EFETIVO <span class="text-red-500">*</span>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">
+                QTDE EFETIVO <span class="text-(--color-pmro-danger)">*</span>
               </label>
               <input
                 v-model.number="form.qtdeEfetivo"
                 type="number"
                 min="0"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+                class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
               />
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                QTDE VIATURAS <span class="text-red-500">*</span>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">
+                QTDE VIATURAS <span class="text-(--color-pmro-danger)">*</span>
               </label>
               <input
                 v-model.number="form.qtdeViaturas"
                 type="number"
                 min="0"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+                class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
               />
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                RECURSO FINANCEIRO EMPREGADO (R$) <span class="text-red-500">*</span>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">
+                RECURSO FINANCEIRO EMPREGADO (R$) <span class="text-(--color-pmro-danger)">*</span>
               </label>
               <input
                 v-model.number="form.recursoFinanceiroEmpregado"
                 type="number"
                 min="0"
                 step="0.01"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+                class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
               />
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                VALOR GASTO (R$) <span class="text-red-500">*</span>
+              <label class="block text-sm font-medium text-(--color-text-secondary) mb-1">
+                VALOR GASTO (R$) <span class="text-(--color-pmro-danger)">*</span>
               </label>
               <input
                 v-model.number="form.valorGasto"
                 type="number"
                 min="0"
                 step="0.01"
-                class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+                class="w-full border border-(--color-border) rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
               />
             </div>
           </div>
@@ -328,34 +328,34 @@ const salvar = async (status: "rascunho" | "pendente") => {
 
       <div class="space-y-6">
         <div class="card card-accent-purple p-6">
-          <h2 class="text-lg font-semibold text-gray-800 mb-4">Indicadores</h2>
+          <h2 class="text-lg font-semibold text-(--color-text-primary) mb-4">Indicadores</h2>
 
           <div class="space-y-4">
-            <div class="p-4 bg-gray-50 rounded-lg">
-              <p class="text-sm text-gray-500">Custo por Dia</p>
-              <p class="text-xl font-bold text-gray-800">{{ formatCurrency(custoPorDia) }}</p>
+            <div class="p-4 bg-(--color-surface-elevated) rounded-lg">
+              <p class="text-sm text-(--color-text-muted)">Custo por Dia</p>
+              <p class="text-xl font-bold text-(--color-text-primary)">{{ formatCurrency(custoPorDia) }}</p>
             </div>
 
-            <div class="p-4 bg-gray-50 rounded-lg">
-              <p class="text-sm text-gray-500">Custo por Efetivo</p>
-              <p class="text-xl font-bold text-gray-800">{{ formatCurrency(custoPorEfetivo) }}</p>
+            <div class="p-4 bg-(--color-surface-elevated) rounded-lg">
+              <p class="text-sm text-(--color-text-muted)">Custo por Efetivo</p>
+              <p class="text-xl font-bold text-(--color-text-primary)">{{ formatCurrency(custoPorEfetivo) }}</p>
             </div>
 
-            <div class="p-4 bg-gray-50 rounded-lg">
-              <p class="text-sm text-gray-500">Execução Orçamentária</p>
+            <div class="p-4 bg-(--color-surface-elevated) rounded-lg">
+              <p class="text-sm text-(--color-text-muted)">Execução Orçamentária</p>
               <p
                 class="text-xl font-bold"
-                :class="percentualExecucao > 100 ? 'text-red-600' : 'text-gray-800'"
+                :class="percentualExecucao > 100 ? 'text-(--color-pmro-danger)' : 'text-(--color-text-primary)'"
               >
                 {{ percentualExecucao.toFixed(1) }}%
               </p>
             </div>
 
-            <div class="p-4 bg-gray-50 rounded-lg">
-              <p class="text-sm text-gray-500">Saldo Restante</p>
+            <div class="p-4 bg-(--color-surface-elevated) rounded-lg">
+              <p class="text-sm text-(--color-text-muted)">Saldo Restante</p>
               <p
                 class="text-xl font-bold"
-                :class="saldoRestante >= 0 ? 'text-green-600' : 'text-red-600'"
+                :class="saldoRestante >= 0 ? 'text-(--color-success)' : 'text-(--color-pmro-danger)'"
               >
                 {{ formatCurrency(saldoRestante) }}
               </p>
@@ -364,13 +364,13 @@ const salvar = async (status: "rascunho" | "pendente") => {
         </div>
 
         <div class="card p-6">
-          <h2 class="text-lg font-semibold text-gray-800 mb-4">Ações</h2>
+          <h2 class="text-lg font-semibold text-(--color-text-primary) mb-4">Ações</h2>
 
           <div class="space-y-3">
             <button
               @click="salvar('rascunho')"
               :disabled="salvando"
-              class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+              class="w-full bg-(--color-surface-elevated) hover:bg-(--color-border) text-(--color-text-secondary) font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -386,7 +386,7 @@ const salvar = async (status: "rascunho" | "pendente") => {
             <button
               @click="salvar('pendente')"
               :disabled="salvando"
-              class="w-full bg-[#1e3a5f] hover:bg-[#0f2442] text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+              class="w-full bg-(--color-pmro) hover:bg-(--color-pmro-blue) text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path

@@ -316,13 +316,13 @@ const imprimir = () => window.print();
     <!-- Header -->
     <div class="flex items-center justify-between print:hidden">
       <div>
-        <h1 class="text-2xl font-bold text-gray-800">Relatórios</h1>
-        <p class="text-gray-500">Relatórios gerenciais e operacionais</p>
+        <h1 class="text-2xl font-bold text-(--color-text-primary)">Relatórios</h1>
+        <p class="text-(--color-text-muted)">Relatórios gerenciais e operacionais</p>
       </div>
       <div class="flex items-center gap-2">
         <button
           @click="imprimir"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 text-gray-700 text-sm font-medium hover:bg-gray-50 transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-(--color-border) text-(--color-text-secondary) text-sm font-medium hover:bg-(--color-surface-elevated) transition-colors"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
@@ -336,7 +336,7 @@ const imprimir = () => window.print();
         </button>
         <button
           @click="gerarCSV"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1e3a5f] hover:bg-[#0f2442] text-white text-sm font-medium transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-(--color-pmro) hover:bg-(--color-pmro-blue) text-white text-sm font-medium transition-colors"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
@@ -353,12 +353,12 @@ const imprimir = () => window.print();
 
     <!-- Print header -->
     <div class="hidden print:block mb-6">
-      <div class="flex items-center justify-between border-b-2 border-[#1e3a5f] pb-3 mb-4">
+      <div class="flex items-center justify-between border-b-2 border-(--color-pmro) pb-3 mb-4">
         <div>
-          <h1 class="text-2xl font-bold text-[#1e3a5f]">Relatório de Operações Policiais</h1>
-          <p class="text-sm text-gray-500 mt-0.5">Polícia Militar do Estado de Rondônia — CPO</p>
+          <h1 class="text-2xl font-bold text-(--color-pmro)">Relatório de Operações Policiais</h1>
+          <p class="text-sm text-(--color-text-muted) mt-0.5">Polícia Militar do Estado de Rondônia — CPO</p>
         </div>
-        <div class="text-right text-xs text-gray-500">
+        <div class="text-right text-xs text-(--color-text-muted)">
           <p>Gerado em {{ new Date().toLocaleString("pt-BR") }}</p>
           <p v-if="periodoInicio || periodoFim">
             Período:
@@ -374,16 +374,16 @@ const imprimir = () => window.print();
     <div class="card p-4 print:hidden">
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
         <div class="lg:col-span-2">
-          <label class="block text-xs font-medium text-gray-700 mb-1">Buscar</label>
+          <label class="block text-xs font-medium text-(--color-text-secondary) mb-1">Buscar</label>
           <div class="relative">
             <input
               v-model="buscaTexto"
               type="text"
               placeholder="Nome, SEI ou Código SISEG..."
-              class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f] pl-9"
+              class="w-full border border-(--color-border) rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro) pl-9"
             />
             <svg
-              class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-(--color-text-muted)"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -398,87 +398,87 @@ const imprimir = () => window.print();
           </div>
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-700 mb-1">Período Início</label>
+          <label class="block text-xs font-medium text-(--color-text-secondary) mb-1">Período Início</label>
           <input
             v-model="periodoInicio"
             type="date"
             :min="dataMinimaLancamento"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           />
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-700 mb-1">Período Fim</label>
+          <label class="block text-xs font-medium text-(--color-text-secondary) mb-1">Período Fim</label>
           <input
             v-model="periodoFim"
             type="date"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           />
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-700 mb-1">BPM</label>
+          <label class="block text-xs font-medium text-(--color-text-secondary) mb-1">BPM</label>
           <select
             v-model="organizacaoSelecionada"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           >
             <option value="">Todos</option>
             <option v-for="op in organizacoesUnicas" :key="op" :value="op">{{ op }}</option>
           </select>
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-700 mb-1">CRP</label>
+          <label class="block text-xs font-medium text-(--color-text-secondary) mb-1">CRP</label>
           <select
             v-model="filtroCRP"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           >
             <option value="">Todos</option>
             <option v-for="c in crpsUnicos" :key="c" :value="c">{{ c }}</option>
           </select>
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-700 mb-1">Policiamento Empregado</label>
+          <label class="block text-xs font-medium text-(--color-text-secondary) mb-1">Policiamento Empregado</label>
           <select
             v-model="filtroPoliciamento"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           >
             <option value="">Todos</option>
             <option v-for="p in policiamentosUnicos" :key="p" :value="p">{{ p }}</option>
           </select>
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-700 mb-1">Tipo de Recurso</label>
+          <label class="block text-xs font-medium text-(--color-text-secondary) mb-1">Tipo de Recurso</label>
           <select
             v-model="filtroTipoRecurso"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           >
             <option value="">Todos</option>
             <option v-for="t in tiposRecursoUnicos" :key="t" :value="t">{{ t }}</option>
           </select>
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-700 mb-1">Área</label>
+          <label class="block text-xs font-medium text-(--color-text-secondary) mb-1">Área</label>
           <select
             v-model="filtroArea"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           >
             <option value="">Todas</option>
             <option v-for="a in areasUnicas" :key="a" :value="a">{{ a }}</option>
           </select>
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-700 mb-1">Município/Distrito</label>
+          <label class="block text-xs font-medium text-(--color-text-secondary) mb-1">Município/Distrito</label>
           <select
             v-model="filtroMunicipio"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           >
             <option value="">Todos</option>
             <option v-for="m in municipiosUnicos" :key="m" :value="m">{{ m }}</option>
           </select>
         </div>
         <div>
-          <label class="block text-xs font-medium text-gray-700 mb-1">Órgão Demandante</label>
+          <label class="block text-xs font-medium text-(--color-text-secondary) mb-1">Órgão Demandante</label>
           <select
             v-model="filtroOrgao"
-            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1e3a5f]/20 focus:border-[#1e3a5f]"
+            class="w-full border border-(--color-border) rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-(--color-pmro)/20 focus:border-(--color-pmro)"
           >
             <option value="">Todos</option>
             <option v-for="o in orgaosUnicos" :key="o" :value="o">{{ o }}</option>
@@ -497,7 +497,7 @@ const imprimir = () => window.print();
               filtroMunicipio = '';
               filtroOrgao = '';
             "
-            class="w-full border border-gray-300 text-gray-600 text-sm font-medium py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors"
+            class="w-full border border-(--color-border) text-(--color-text-secondary) text-sm font-medium py-2 px-3 rounded-lg hover:bg-(--color-surface-elevated) transition-colors"
           >
             Limpar Filtros
           </button>
@@ -509,9 +509,9 @@ const imprimir = () => window.print();
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div class="card p-5 flex items-center gap-4">
         <div
-          class="w-11 h-11 rounded-lg bg-[#1e3a5f]/10 flex items-center justify-center flex-shrink-0"
+          class="w-11 h-11 rounded-lg bg-(--color-pmro)/10 flex items-center justify-center flex-shrink-0"
         >
-          <svg class="w-5 h-5 text-[#1e3a5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 text-(--color-pmro)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -521,16 +521,16 @@ const imprimir = () => window.print();
           </svg>
         </div>
         <div class="min-w-0">
-          <p class="text-xs text-gray-500 uppercase tracking-wide truncate">
+          <p class="text-xs text-(--color-text-muted) uppercase tracking-wide truncate">
             Recurso Financeiro Empregado
           </p>
-          <p class="text-xl font-bold text-gray-900 truncate">{{ formatCurrency(totalRecurso) }}</p>
+          <p class="text-xl font-bold text-(--color-text-primary) truncate">{{ formatCurrency(totalRecurso) }}</p>
         </div>
       </div>
 
       <div class="card p-5 flex items-center gap-4">
-        <div class="w-11 h-11 rounded-lg bg-blue-50 flex items-center justify-center flex-shrink-0">
-          <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="w-11 h-11 rounded-lg bg-(--color-pmro-blue)/10 flex items-center justify-center flex-shrink-0">
+          <svg class="w-5 h-5 text-(--color-pmro-blue)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -540,18 +540,18 @@ const imprimir = () => window.print();
           </svg>
         </div>
         <div class="min-w-0">
-          <p class="text-xs text-gray-500 uppercase tracking-wide truncate">Custo Médio por Dia</p>
-          <p class="text-xl font-bold text-gray-900 truncate">{{ formatCurrency(custoPorDia) }}</p>
-          <p class="text-xs text-gray-400 mt-0.5">Recurso ÷ Total de Dias</p>
+          <p class="text-xs text-(--color-text-muted) uppercase tracking-wide truncate">Custo Médio por Dia</p>
+          <p class="text-xl font-bold text-(--color-text-primary) truncate">{{ formatCurrency(custoPorDia) }}</p>
+          <p class="text-xs text-(--color-text-muted) mt-0.5">Recurso ÷ Total de Dias</p>
         </div>
       </div>
 
       <div class="card p-5 flex items-center gap-4">
         <div
-          class="w-11 h-11 rounded-lg bg-purple-50 flex items-center justify-center flex-shrink-0"
+          class="w-11 h-11 rounded-lg bg-(--color-pmro-accent)/10 flex items-center justify-center flex-shrink-0"
         >
           <svg
-            class="w-5 h-5 text-purple-600"
+            class="w-5 h-5 text-(--color-pmro-accent)"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -565,13 +565,13 @@ const imprimir = () => window.print();
           </svg>
         </div>
         <div class="min-w-0">
-          <p class="text-xs text-gray-500 uppercase tracking-wide truncate">
+          <p class="text-xs text-(--color-text-muted) uppercase tracking-wide truncate">
             Custo Médio por Policial
           </p>
-          <p class="text-xl font-bold text-gray-900 truncate">
+          <p class="text-xl font-bold text-(--color-text-primary) truncate">
             {{ formatCurrency(custoPorEfetivo) }}
           </p>
-          <p class="text-xs text-gray-400 mt-0.5">Recurso ÷ Efetivo</p>
+          <p class="text-xs text-(--color-text-muted) mt-0.5">Recurso ÷ Efetivo</p>
         </div>
       </div>
     </div>
@@ -579,28 +579,28 @@ const imprimir = () => window.print();
     <!-- KPI Row 2: Operational -->
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
       <div class="card p-4 text-center">
-        <p class="text-xs text-gray-500 mb-1">Total de Operações</p>
-        <p class="text-2xl font-bold text-[#1e3a5f]">{{ totalOperacoes }}</p>
+        <p class="text-xs text-(--color-text-muted) mb-1">Total de Operações</p>
+        <p class="text-2xl font-bold text-(--color-pmro)">{{ totalOperacoes }}</p>
       </div>
       <div class="card p-4 text-center">
-        <p class="text-xs text-gray-500 mb-1">Total de Policiais</p>
-        <p class="text-2xl font-bold text-[#1e3a5f]">{{ totalEfetivo.toLocaleString("pt-BR") }}</p>
+        <p class="text-xs text-(--color-text-muted) mb-1">Total de Policiais</p>
+        <p class="text-2xl font-bold text-(--color-pmro)">{{ totalEfetivo.toLocaleString("pt-BR") }}</p>
       </div>
       <div class="card p-4 text-center">
-        <p class="text-xs text-gray-500 mb-1">Total de Viaturas</p>
-        <p class="text-2xl font-bold text-[#1e3a5f]">{{ totalViaturas.toLocaleString("pt-BR") }}</p>
+        <p class="text-xs text-(--color-text-muted) mb-1">Total de Viaturas</p>
+        <p class="text-2xl font-bold text-(--color-pmro)">{{ totalViaturas.toLocaleString("pt-BR") }}</p>
       </div>
       <div class="card p-4 text-center">
-        <p class="text-xs text-gray-500 mb-1">Total de Dias</p>
-        <p class="text-2xl font-bold text-[#1e3a5f]">{{ totalDias.toLocaleString("pt-BR") }}</p>
+        <p class="text-xs text-(--color-text-muted) mb-1">Total de Dias</p>
+        <p class="text-2xl font-bold text-(--color-pmro)">{{ totalDias.toLocaleString("pt-BR") }}</p>
       </div>
       <div class="card p-4 text-center">
-        <p class="text-xs text-gray-500 mb-1">Municípios/Distritos</p>
-        <p class="text-2xl font-bold text-[#1e3a5f]">{{ totalMunicipios }}</p>
+        <p class="text-xs text-(--color-text-muted) mb-1">Municípios/Distritos</p>
+        <p class="text-2xl font-bold text-(--color-pmro)">{{ totalMunicipios }}</p>
       </div>
       <div class="card p-4 text-center">
-        <p class="text-xs text-gray-500 mb-1">Órgãos Demandantes</p>
-        <p class="text-2xl font-bold text-[#1e3a5f]">{{ totalOrgaos }}</p>
+        <p class="text-xs text-(--color-text-muted) mb-1">Órgãos Demandantes</p>
+        <p class="text-2xl font-bold text-(--color-pmro)">{{ totalOrgaos }}</p>
       </div>
     </div>
 
@@ -608,33 +608,33 @@ const imprimir = () => window.print();
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <!-- Operações por Mês -->
       <div class="card p-6">
-        <h2 class="text-base font-semibold text-gray-800 mb-4">Operações por Mês</h2>
+        <h2 class="text-base font-semibold text-(--color-text-primary) mb-4">Operações por Mês</h2>
         <div class="flex items-end justify-between h-36 gap-1">
           <div v-for="item in porMes" :key="item.mes" class="flex flex-col items-center flex-1">
-            <span class="text-xs text-gray-400 mb-0.5">{{ item.total > 0 ? item.total : "" }}</span>
+            <span class="text-xs text-(--color-text-muted) mb-0.5">{{ item.total > 0 ? item.total : "" }}</span>
             <div
-              class="w-full bg-[#1e3a5f] rounded-t transition-all duration-300"
+              class="w-full bg-(--color-pmro) rounded-t transition-all duration-300"
               :style="{
                 height: `${(item.total / maxPorMes) * 110}px`,
                 minHeight: item.total > 0 ? '4px' : '0',
               }"
             ></div>
-            <span class="text-xs text-gray-500 mt-1">{{ item.mes }}</span>
+            <span class="text-xs text-(--color-text-muted) mt-1">{{ item.mes }}</span>
           </div>
         </div>
       </div>
 
       <!-- Operações por Área -->
       <div class="card p-6">
-        <h2 class="text-base font-semibold text-gray-800 mb-4">Operações por Área</h2>
+        <h2 class="text-base font-semibold text-(--color-text-primary) mb-4">Operações por Área</h2>
         <div class="space-y-3">
           <div v-for="item in porArea" :key="item.area" class="flex items-center gap-3">
-            <span class="text-xs text-gray-600 w-36 truncate font-medium" :title="item.area">{{
+            <span class="text-xs text-(--color-text-secondary) w-36 truncate font-medium" :title="item.area">{{
               item.area
             }}</span>
-            <div class="flex-1 h-6 bg-gray-100 rounded-full overflow-hidden">
+            <div class="flex-1 h-6 bg-(--color-surface-elevated) rounded-full overflow-hidden">
               <div
-                class="h-full bg-[#1e3a5f] rounded-full transition-all duration-300 flex items-center justify-end pr-2"
+                class="h-full bg-(--color-pmro) rounded-full transition-all duration-300 flex items-center justify-end pr-2"
                 :style="{
                   width: `${pct(item.count, totalOperacoes)}%`,
                   minWidth: item.count > 0 ? '24px' : '0',
@@ -643,27 +643,27 @@ const imprimir = () => window.print();
                 <span class="text-xs text-white font-semibold">{{ item.count }}</span>
               </div>
             </div>
-            <span class="text-xs text-gray-500 w-12 text-right"
+            <span class="text-xs text-(--color-text-muted) w-12 text-right"
               >{{ pct(item.count, totalOperacoes).toFixed(0) }}%</span
             >
           </div>
-          <p v-if="!porArea.length" class="text-sm text-gray-400 text-center py-4">Nenhum dado</p>
+          <p v-if="!porArea.length" class="text-sm text-(--color-text-muted) text-center py-4">Nenhum dado</p>
         </div>
       </div>
 
       <!-- Operações por Tipo de Policiamento -->
       <div class="card p-6">
-        <h2 class="text-base font-semibold text-gray-800 mb-4">
+        <h2 class="text-base font-semibold text-(--color-text-primary) mb-4">
           Operações por Tipo de Policiamento
         </h2>
         <div class="space-y-3">
           <div v-for="item in porTipo" :key="item.tipo" class="flex items-center gap-3">
-            <span class="text-xs text-gray-600 w-36 truncate" :title="item.tipo">{{
+            <span class="text-xs text-(--color-text-secondary) w-36 truncate" :title="item.tipo">{{
               item.tipo
             }}</span>
-            <div class="flex-1 h-6 bg-gray-100 rounded-full overflow-hidden">
+            <div class="flex-1 h-6 bg-(--color-surface-elevated) rounded-full overflow-hidden">
               <div
-                class="h-full bg-[#1e3a5f] rounded-full transition-all duration-300 flex items-center justify-end pr-2"
+                class="h-full bg-(--color-pmro) rounded-full transition-all duration-300 flex items-center justify-end pr-2"
                 :style="{
                   width: `${pct(item.count, totalOperacoes)}%`,
                   minWidth: item.count > 0 ? '24px' : '0',
@@ -674,25 +674,25 @@ const imprimir = () => window.print();
                 >
               </div>
             </div>
-            <span class="text-xs text-gray-400 w-28 text-right truncate">{{
+            <span class="text-xs text-(--color-text-muted) w-28 text-right truncate">{{
               formatCurrency(item.recurso)
             }}</span>
           </div>
-          <p v-if="!porTipo.length" class="text-sm text-gray-400 text-center py-4">Nenhum dado</p>
+          <p v-if="!porTipo.length" class="text-sm text-(--color-text-muted) text-center py-4">Nenhum dado</p>
         </div>
       </div>
 
       <!-- Operações por Organização -->
       <div class="card p-6">
-        <h2 class="text-base font-semibold text-gray-800 mb-4">Operações por CRP</h2>
+        <h2 class="text-base font-semibold text-(--color-text-primary) mb-4">Operações por CRP</h2>
         <div class="space-y-3">
           <div v-for="item in porTipoPorCRP" :key="item.crp" class="flex items-center gap-3">
-            <span class="text-xs text-gray-600 w-36 truncate font-medium" :title="item.crp">{{
+            <span class="text-xs text-(--color-text-secondary) w-36 truncate font-medium" :title="item.crp">{{
               item.crp
             }}</span>
-            <div class="flex-1 h-6 bg-gray-100 rounded-full overflow-hidden">
+            <div class="flex-1 h-6 bg-(--color-surface-elevated) rounded-full overflow-hidden">
               <div
-                class="h-full bg-[#1e3a5f] rounded-full transition-all duration-300 flex items-center justify-end pr-2"
+                class="h-full bg-(--color-pmro) rounded-full transition-all duration-300 flex items-center justify-end pr-2"
                 :style="{
                   width: `${pct(item.count, totalOperacoes)}%`,
                   minWidth: item.count > 0 ? '24px' : '0',
@@ -701,11 +701,11 @@ const imprimir = () => window.print();
                 <span class="text-xs text-white font-semibold">{{ item.count }}</span>
               </div>
             </div>
-            <span class="text-xs text-gray-400 w-16 text-right"
+            <span class="text-xs text-(--color-text-muted) w-16 text-right"
               >{{ pct(item.count, totalOperacoes).toFixed(0) }}%</span
             >
           </div>
-          <p v-if="!porTipoPorCRP.length" class="text-sm text-gray-400 text-center py-4">
+          <p v-if="!porTipoPorCRP.length" class="text-sm text-(--color-text-muted) text-center py-4">
             Nenhum dado
           </p>
         </div>
@@ -716,7 +716,7 @@ const imprimir = () => window.print();
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <!-- Por Município -->
       <div class="card p-6">
-        <h2 class="text-base font-semibold text-gray-800 mb-4">Operações por Município</h2>
+        <h2 class="text-base font-semibold text-(--color-text-primary) mb-4">Operações por Município</h2>
         <div class="table-container !border-0 !rounded-none !shadow-none !bg-transparent !overflow-visible">
           <table class="custom-table custom-table-dense">
             <thead>
@@ -729,20 +729,20 @@ const imprimir = () => window.print();
             </thead>
             <tbody>
               <tr v-for="item in porMunicipio" :key="item.municipio">
-                <td class="font-medium text-gray-800">{{ item.municipio }}</td>
+                <td class="font-medium text-(--color-text-primary)">{{ item.municipio }}</td>
                 <td class="text-center">
                   <span
-                    class="px-2 py-0.5 bg-[#1e3a5f]/10 text-[#1e3a5f] rounded-full text-xs font-semibold"
+                    class="px-2 py-0.5 bg-(--color-pmro)/10 text-(--color-pmro) rounded-full text-xs font-semibold"
                     >{{ item.count }}</span
                   >
                 </td>
-                <td class="text-center text-gray-600">{{ item.efetivo }}</td>
-                <td class="text-right text-gray-700 font-medium">
+                <td class="text-center text-(--color-text-secondary)">{{ item.efetivo }}</td>
+                <td class="text-right text-(--color-text-secondary) font-medium">
                   {{ formatCurrency(item.recurso) }}
                 </td>
               </tr>
               <tr v-if="!porMunicipio.length">
-                <td colspan="4" class="py-6 text-center text-gray-400 text-xs">
+                <td colspan="4" class="py-6 text-center text-(--color-text-muted) text-xs">
                   Nenhum dado encontrado
                 </td>
               </tr>
@@ -753,7 +753,7 @@ const imprimir = () => window.print();
 
       <!-- Operações por BPM -->
       <div class="card p-6">
-        <h2 class="text-base font-semibold text-gray-800 mb-4">Operações por BPM</h2>
+        <h2 class="text-base font-semibold text-(--color-text-primary) mb-4">Operações por BPM</h2>
         <div class="table-container !border-0 !rounded-none !shadow-none !bg-transparent !overflow-visible">
           <table class="custom-table custom-table-dense">
             <thead>
@@ -766,18 +766,18 @@ const imprimir = () => window.print();
             </thead>
             <tbody>
               <tr v-for="item in porOrganizacao" :key="item.org">
-                <td class="font-medium text-gray-800">{{ item.org }}</td>
+                <td class="font-medium text-(--color-text-primary)">{{ item.org }}</td>
                 <td class="text-center">
                   <span
-                    class="px-2 py-0.5 bg-[#1e3a5f]/10 text-[#1e3a5f] rounded-full text-xs font-semibold"
+                    class="px-2 py-0.5 bg-(--color-pmro)/10 text-(--color-pmro) rounded-full text-xs font-semibold"
                     >{{ item.count }}</span
                   >
                 </td>
-                <td class="text-right text-gray-700">{{ formatCurrency(item.recurso) }}</td>
-                <td class="text-center font-semibold text-gray-700">{{ item.efetivo }}</td>
+                <td class="text-right text-(--color-text-secondary)">{{ formatCurrency(item.recurso) }}</td>
+                <td class="text-center font-semibold text-(--color-text-secondary)">{{ item.efetivo }}</td>
               </tr>
               <tr v-if="!porOrganizacao.length">
-                <td colspan="5" class="py-6 text-center text-gray-400 text-xs">
+                <td colspan="5" class="py-6 text-center text-(--color-text-muted) text-xs">
                   Nenhum dado encontrado
                 </td>
               </tr>
@@ -790,8 +790,8 @@ const imprimir = () => window.print();
     <!-- Detail Table -->
     <div class="card p-6">
       <div class="flex items-center justify-between mb-4">
-        <h2 class="text-base font-semibold text-gray-800">Detalhamento das Operações</h2>
-        <span class="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-full"
+        <h2 class="text-base font-semibold text-(--color-text-primary)">Detalhamento das Operações</h2>
+        <span class="text-xs text-(--color-text-muted) bg-(--color-surface-elevated) px-2 py-1 rounded-full"
           >{{ operacoesFiltradas.length }} registros</span
         >
       </div>
@@ -812,30 +812,30 @@ const imprimir = () => window.print();
           </thead>
           <tbody>
             <tr v-for="op in operacoesFiltradas" :key="op.id">
-              <td class="font-medium text-[#1e3a5f]">
+              <td class="font-medium text-(--color-pmro)">
                 <router-link :to="`/operacoes/${op.id}`" class="hover:underline">
                   {{ op.nomeOperacaoApoio }}
                 </router-link>
               </td>
-              <td class="text-gray-600">{{ op.municipio }}</td>
-              <td class="text-gray-500 whitespace-nowrap">
+              <td class="text-(--color-text-secondary)">{{ op.municipio }}</td>
+              <td class="text-(--color-text-muted) whitespace-nowrap">
                 {{ formatDate(op.diaInicio) }}
               </td>
-              <td class="text-center text-gray-600">{{ op.totalDias }}</td>
-              <td class="text-center text-gray-600">{{ op.qtdeEfetivo }}</td>
-              <td class="text-center text-gray-600">{{ op.qtdeViaturas }}</td>
-              <td class="text-right text-gray-700 font-medium">
+              <td class="text-center text-(--color-text-secondary)">{{ op.totalDias }}</td>
+              <td class="text-center text-(--color-text-secondary)">{{ op.qtdeEfetivo }}</td>
+              <td class="text-center text-(--color-text-secondary)">{{ op.qtdeViaturas }}</td>
+              <td class="text-right text-(--color-text-secondary) font-medium">
                 {{ formatCurrency(op.recursoFinanceiroEmpregado) }}
               </td>
-              <td class="text-gray-600 text-xs">
+              <td class="text-(--color-text-secondary) text-xs">
                 {{ op.organizacaoPolicialMilitar || "-" }}
               </td>
-              <td class="text-gray-600 text-xs">
+              <td class="text-(--color-text-secondary) text-xs">
                 {{ op.comandoRegional || op.crp || "-" }}
               </td>
             </tr>
             <tr v-if="!operacoesFiltradas.length">
-              <td colspan="9" class="py-6 text-center text-gray-400 text-xs">
+              <td colspan="9" class="py-6 text-center text-(--color-text-muted) text-xs">
                 Nenhuma operação encontrada com os filtros selecionados.
               </td>
             </tr>
